@@ -1,4 +1,8 @@
-git rm --cached .DS_Store
-git rm --cached BazarBookUIKit.xcodeproj/project.pbxproj
-git rm --cached BazarBookUIKit.xcodeproj/project.xcworkspace/xcuserdata/yanuarnvl.xcuserdatad/UserInterfaceState.xcuserstate
-git rm --cached BazarBookUIKit.xcodeproj/xcuserdata/yanuarnvl.xcuserdatad/xcschemes/xcschememanagement.plist
+# macOS system files
+.DS_Store
+
+# Xcode user-specific files
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcuserdatad/
+*.xcuserstate
+*.xcschemes/
