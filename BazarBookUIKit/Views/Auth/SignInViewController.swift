@@ -145,6 +145,7 @@ extension SignInViewController {
         // for "or with " widget
         NSLayoutConstraint.activate([
             // Left line constraints
+            
             diver1.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             diver1.trailingAnchor.constraint(equalTo: orWith.leadingAnchor, constant: -8),
             diver1.centerYAnchor.constraint(equalTo: orWith.centerYAnchor),
