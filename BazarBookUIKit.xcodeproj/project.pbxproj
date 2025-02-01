@@ -12,6 +12,7 @@
 		E4232E222D0003AC00D9D954 /* Inter_24pt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4232E1F2D0003AC00D9D954 /* Inter_24pt-SemiBold.ttf */; };
 		E4232E232D0003AC00D9D954 /* Inter_24pt-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4232E1C2D0003AC00D9D954 /* Inter_24pt-Italic.ttf */; };
 		E43CE0512CB43C9D007E108D /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43CE0502CB43C9D007E108D /* SecondaryButton.swift */; };
+		E4402EFD2D3E603500578DCA /* SosialMediaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4402EFC2D3E603500578DCA /* SosialMediaButton.swift */; };
 		E44B14DD2C8968010082FB19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B14DC2C8968010082FB19 /* AppDelegate.swift */; };
 		E44B14E62C8968020082FB19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E44B14E52C8968020082FB19 /* Assets.xcassets */; };
 		E44B14E92C8968020082FB19 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = E44B14E82C8968020082FB19 /* Base */; };
@@ -31,6 +32,7 @@
 		E4232E1E2D0003AC00D9D954 /* Inter_24pt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter_24pt-Regular.ttf"; sourceTree = "<group>"; };
 		E4232E1F2D0003AC00D9D954 /* Inter_24pt-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter_24pt-SemiBold.ttf"; sourceTree = "<group>"; };
 		E43CE0502CB43C9D007E108D /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		E4402EFC2D3E603500578DCA /* SosialMediaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SosialMediaButton.swift; sourceTree = "<group>"; };
 		E44B14D92C8968010082FB19 /* BazarBookUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BazarBookUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44B14DC2C8968010082FB19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E44B14E52C8968020082FB19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				E46558502CFD63E20042EC57 /* BazarTextField.swift */,
 				E45DD5502C8DB035009D8B87 /* PrimaryButton.swift */,
+				E4402EFC2D3E603500578DCA /* SosialMediaButton.swift */,
 				E43CE0502CB43C9D007E108D /* SecondaryButton.swift */,
 			);
 			path = Components;
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E43CE0512CB43C9D007E108D /* SecondaryButton.swift in Sources */,
+				E4402EFD2D3E603500578DCA /* SosialMediaButton.swift in Sources */,
 				E45DD5512C8DB035009D8B87 /* PrimaryButton.swift in Sources */,
 				E46558512CFD64000042EC57 /* BazarTextField.swift in Sources */,
 				E478FD402C8B51F5005A84F4 /* OnboardingViewController.swift in Sources */,
