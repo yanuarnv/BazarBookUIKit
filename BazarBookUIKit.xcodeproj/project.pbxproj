@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E41E15F72D4E75A3009C15BF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41E15F62D4E75A3009C15BF /* SignUpViewController.swift */; };
+		E41F66B92D4FB42A00CB6D4A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F66B82D4FB41300CB6D4A /* ForgotPasswordViewController.swift */; };
+		E41F66BB2D4FB86F00CB6D4A /* ForgotPasswordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41F66BA2D4FB86700CB6D4A /* ForgotPasswordCard.swift */; };
 		E4232E202D0003AC00D9D954 /* Inter_24pt-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4232E1D2D0003AC00D9D954 /* Inter_24pt-Light.ttf */; };
 		E4232E212D0003AC00D9D954 /* Inter_24pt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4232E1E2D0003AC00D9D954 /* Inter_24pt-Regular.ttf */; };
 		E4232E222D0003AC00D9D954 /* Inter_24pt-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4232E1F2D0003AC00D9D954 /* Inter_24pt-SemiBold.ttf */; };
@@ -27,6 +30,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E41E15F62D4E75A3009C15BF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		E41F66B82D4FB41300CB6D4A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		E41F66BA2D4FB86700CB6D4A /* ForgotPasswordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCard.swift; sourceTree = "<group>"; };
 		E4232E1C2D0003AC00D9D954 /* Inter_24pt-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter_24pt-Italic.ttf"; sourceTree = "<group>"; };
 		E4232E1D2D0003AC00D9D954 /* Inter_24pt-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter_24pt-Light.ttf"; sourceTree = "<group>"; };
 		E4232E1E2D0003AC00D9D954 /* Inter_24pt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter_24pt-Regular.ttf"; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 		E45DD54F2C8DB017009D8B87 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E41F66BA2D4FB86700CB6D4A /* ForgotPasswordCard.swift */,
 				E46558502CFD63E20042EC57 /* BazarTextField.swift */,
 				E45DD5502C8DB035009D8B87 /* PrimaryButton.swift */,
 				E4402EFC2D3E603500578DCA /* SosialMediaButton.swift */,
@@ -116,7 +123,9 @@
 		E478FD3B2C8B1F68005A84F4 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				E41F66B82D4FB41300CB6D4A /* ForgotPasswordViewController.swift */,
 				E4D16FCC2CB8C89300EDC88A /* SignInViewController.swift */,
+				E41E15F62D4E75A3009C15BF /* SignUpViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -238,7 +247,10 @@
 				E4D16FD42CB8D17400EDC88A /* Font+Extentions.swift in Sources */,
 				E478FD422C8B5BA1005A84F4 /* OnboardingItemViewController.swift in Sources */,
 				E4D16FCD2CB8C8DE00EDC88A /* SignInViewController.swift in Sources */,
+				E41E15F72D4E75A3009C15BF /* SignUpViewController.swift in Sources */,
+				E41F66BB2D4FB86F00CB6D4A /* ForgotPasswordCard.swift in Sources */,
 				E478FD512C8C3EFF005A84F4 /* OnBoardingModel.swift in Sources */,
+				E41F66B92D4FB42A00CB6D4A /* ForgotPasswordViewController.swift in Sources */,
 				E44B14DD2C8968010082FB19 /* AppDelegate.swift in Sources */,
 				E478FD4A2C8B65B6005A84F4 /* SceneDelegate.swift in Sources */,
 			);

@@ -13,7 +13,7 @@ extension UIFont {
     }
     
     static var title1:UIFont {
-        UIFont(name: "Inter24pt-Regular", size: 28)!
+        UIFont(name: "Inter24pt-SemiBold", size: 28)!
     }
     
     static var title2:UIFont {

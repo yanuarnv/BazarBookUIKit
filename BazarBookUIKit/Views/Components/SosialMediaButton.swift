@@ -30,7 +30,6 @@ class SosialMediaButton: UIButton{
         configuration?.imagePadding = 10
     }
     
-    
 }
 
 extension SosialMediaButton {
