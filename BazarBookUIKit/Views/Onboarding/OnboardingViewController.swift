@@ -10,9 +10,9 @@ import UIKit
 class OnboardingViewController: UIPageViewController{
     var pages = [UIViewController]()
     let pagesModels:[OnBoardingModel] = [
-       OnBoardingModel(id: 0, imageName: "onboardingFirst", title: "Now reading books will be easier", description: " Discover new worlds, join a vibrant reading community. Start your reading adventure effortlessly with us."),
-       OnBoardingModel(id: 1, imageName: "onboardingSecond", title: "Your Bookish Soulmate Awaits", description: "Let us be your guide to the perfect read. Discover books tailored to your tastes for a truly rewarding experience."),
-       OnBoardingModel(id: 2, imageName: "onboardingThird", title: "Start Your Adventure", description: "Ready to embark on a quest for inspiration and knowledge? Your adventure begins now. Let's go!")
+        OnBoardingModel(id: 0, imageName: "onboardingFirst", title: "Now reading books will be easier", description: " Discover new worlds, join a vibrant reading community. Start your reading adventure effortlessly with us."),
+        OnBoardingModel(id: 1, imageName: "onboardingSecond", title: "Your Bookish Soulmate Awaits", description: "Let us be your guide to the perfect read. Discover books tailored to your tastes for a truly rewarding experience."),
+        OnBoardingModel(id: 2, imageName: "onboardingThird", title: "Start Your Adventure", description: "Ready to embark on a quest for inspiration and knowledge? Your adventure begins now. Let's go!")
     ]
     // external controls
     private let signButton = SecondaryButton()
@@ -26,8 +26,8 @@ class OnboardingViewController: UIPageViewController{
     private var pageControl = UIPageControl()
     
     let initialPage = 0
-
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +38,12 @@ class OnboardingViewController: UIPageViewController{
 }
 
 extension OnboardingViewController {
-    
     func setup() {
         view.addSubview(bottomSection)
         view.addSubview(skipButton)
     }
     func style () {
-       
+        
         signButton.configuration(title: "Sign in")
         //signButton.addTarget(self, action: #selector(skipTapped(_:)), for: .primaryActionTriggered)
         
@@ -59,7 +58,7 @@ extension OnboardingViewController {
         continueButton.addTarget(self, action: #selector(nextTapped(_:)), for: .primaryActionTriggered)
         
         pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)
-        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.currentPageIndicatorTintColor = .primary
         pageControl.pageIndicatorTintColor = .systemGray2
         dataSource = self
         delegate = self
@@ -70,7 +69,10 @@ extension OnboardingViewController {
         
         pageControl.numberOfPages = pages.count
         pageControl.currentPage = initialPage
-        setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
+        
+        setViewControllers([pages[initialPage]], direction: .forward, animated: true){_ in
+            self.changeButtonTitle()
+        }
         
         bottomSection = UIStackView(arrangedSubviews: [pageControl,continueButton,signButton])
         bottomSection.spacing = 10
@@ -98,28 +100,30 @@ extension OnboardingViewController {
 // MARK: - DataSource
 
 extension OnboardingViewController: UIPageViewControllerDataSource {
-    
+    // on people previous slide
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
+        print("viewControllerBefore")
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
-        
         if currentIndex == 0 {
             return pages.last               // wrap last
         } else {
             return pages[currentIndex - 1]  // go previous
         }
     }
-    
+    // on people next slide
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
+        print("viewControllerAfter")
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
-        
+
         if currentIndex < pages.count - 1 {
+           
             return pages[currentIndex + 1]  // go next
         } else {
+          
             return pages.first              // wrap first
         }
     }
+    
 }
 
 // MARK: - Delegates
@@ -133,16 +137,17 @@ extension OnboardingViewController: UIPageViewControllerDelegate {
         guard let currentIndex = pages.firstIndex(of: viewControllers[0]) else { return }
         
         pageControl.currentPage = currentIndex
+        changeButtonTitle()
         
     }
 }
-
 // MARK: - Actions
-
 extension OnboardingViewController {
     
     @objc func pageControlTapped(_ sender: UIPageControl) {
-        setViewControllers([pages[sender.currentPage]], direction: .forward, animated: true, completion: nil)
+        setViewControllers([pages[sender.currentPage]], direction: .forward, animated: true){_ in
+            self.changeButtonTitle()
+        }
     }
     
     @IBAction func skipTapped(_ sender: UIButton) {
@@ -154,26 +159,40 @@ extension OnboardingViewController {
     @IBAction func nextTapped(_ sender: UIButton) {
         if pageControl.currentPage < pages.count - 1{
             pageControl.currentPage += 1
+            goToNextPage()
         }else{
-            pageControl.currentPage = 0
+            self.push(from: self, to: .homeView,replace: true)
         }
-        goToNextPage()
+        
+        
     }
 }
 
 // MARK: - Extensions
-
-extension UIPageViewController {
+extension OnboardingViewController {
+    func changeButtonTitle() {
+        if pageControl.currentPage == pages.count - 1 {
+            continueButton.configuration(title: "next")
+        } else {
+            continueButton.configuration(title: "Continue")
+        }
+    }
     
     func goToSpecificPage(index:Int,ofViewControllers:[UIViewController]){
-        setViewControllers([ofViewControllers[index]], direction: .forward, animated: true)
+        setViewControllers([ofViewControllers[index]], direction: .forward, animated: true){_ in
+            self.changeButtonTitle()
+        }
     }
     
     func goToNextPage(){
         guard let currentPage = viewControllers?[0] else {return}
         guard let nextpage = dataSource?.pageViewController(self, viewControllerAfter: currentPage) else {return}
-        setViewControllers([nextpage], direction: .forward, animated: true)
+        setViewControllers([nextpage], direction: .forward, animated: true){_ in
+            self.changeButtonTitle()
+        }
+        
     }
+
     
 }
 
