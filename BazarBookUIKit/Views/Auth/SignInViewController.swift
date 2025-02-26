@@ -25,11 +25,13 @@ class SignInViewController: UIViewController {
     private let diver1 = UIView()
     private let diver2 = UIView()
     private let orWith = UILabel()
+    private let colum = UIView()
     private var googleSignInButton = SosialMediaButton()
     private var appleSignInButton = SosialMediaButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         setup()
         style()
         layout()
@@ -44,8 +46,9 @@ extension SignInViewController {
         togglePasswordContainer.addSubview(togglePasswordButton)
         
         [titleLabel,subtitleLabel,emailLabel,emailTextField,passwordLabel,passwordTextField,forgotPasswordButton,loginButton,dontHaveAccountSignUPLabel,diver1,diver2,orWith,googleSignInButton,appleSignInButton,togglePasswordContainer].forEach{ item in
-            scrollView.addSubview(item)
+            colum.addSubview(item)
         }
+        scrollView.addSubview(colum)
         view.addSubview(scrollView)
         
         
@@ -95,13 +98,14 @@ extension SignInViewController {
         orWith.text = "Or With"
         orWith.textColor = .textSecondary
         
+        scrollView.showsVerticalScrollIndicator = false
         
         googleSignInButton.googleSignIn()
         appleSignInButton.appleSignIn()
         
         
         // set all UI to translatesAutoresizingMaskIntoConstraints = false
-        [scrollView,titleLabel, subtitleLabel, emailLabel, emailTextField, passwordLabel, passwordTextField, forgotPasswordButton, loginButton,dontHaveAccountSignUPLabel,diver1,diver2,orWith,googleSignInButton,appleSignInButton,togglePasswordButton,togglePasswordContainer].forEach {
+        [scrollView,titleLabel, subtitleLabel, emailLabel, emailTextField, passwordLabel, passwordTextField, forgotPasswordButton, loginButton,dontHaveAccountSignUPLabel,diver1,diver2,orWith,googleSignInButton,appleSignInButton,togglePasswordButton,togglePasswordContainer,colum].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
@@ -116,58 +120,65 @@ extension SignInViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -16),
         ])
         
+        // Constraints for colum
         NSLayoutConstraint.activate([
+            colum.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            colum.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            colum.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            colum.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            colum.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+        ])
+        
+        // Constraints for individual elements
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: colum.topAnchor, constant: 16),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             
-            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 8),
-            // email section
-            emailLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,constant: 30),
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor,constant: 10),
-            emailTextField.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            // password section
-            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor,constant: 30),
+            // Email section
+            emailLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 16),
+            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 10),
+            emailTextField.widthAnchor.constraint(equalTo: colum.widthAnchor),
+            
+            // Password section
+            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 30),
             togglePasswordContainer.topAnchor.constraint(equalTo: passwordTextField.topAnchor),
             togglePasswordContainer.bottomAnchor.constraint(equalTo: passwordTextField.bottomAnchor),
             togglePasswordContainer.widthAnchor.constraint(equalToConstant: 54),
             togglePasswordButton.centerYAnchor.constraint(equalTo: togglePasswordContainer.centerYAnchor),
             togglePasswordButton.centerXAnchor.constraint(equalTo: togglePasswordContainer.centerXAnchor),
-            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor,constant: 10),
-            passwordTextField.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 10),
+            passwordTextField.widthAnchor.constraint(equalTo: colum.widthAnchor),
             
-            forgotPasswordButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 20),
-            loginButton.topAnchor.constraint(equalTo: forgotPasswordButton.bottomAnchor,constant: 30),
-            loginButton.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            dontHaveAccountSignUPLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor,constant: 20),
-            dontHaveAccountSignUPLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            forgotPasswordButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
+            loginButton.topAnchor.constraint(equalTo: forgotPasswordButton.bottomAnchor, constant: 30),
+            loginButton.widthAnchor.constraint(equalTo: colum.widthAnchor),
+            dontHaveAccountSignUPLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
+            dontHaveAccountSignUPLabel.centerXAnchor.constraint(equalTo: colum.centerXAnchor),
             
-        ])
-        
-        // for "or with " widget
-        NSLayoutConstraint.activate([
-            // Left line constraints
-            diver1.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            // For "or with" widget
+            diver1.leadingAnchor.constraint(equalTo: colum.leadingAnchor),
             diver1.trailingAnchor.constraint(equalTo: orWith.leadingAnchor, constant: -8),
             diver1.centerYAnchor.constraint(equalTo: orWith.centerYAnchor),
             diver1.heightAnchor.constraint(equalToConstant: 1),
             
-            // Label constraints
-            orWith.topAnchor.constraint(equalTo: dontHaveAccountSignUPLabel.bottomAnchor,constant: 30),
-            orWith.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            orWith.topAnchor.constraint(equalTo: dontHaveAccountSignUPLabel.bottomAnchor, constant: 30),
+            orWith.centerXAnchor.constraint(equalTo: colum.centerXAnchor),
             
-            // Right line constraints
             diver2.leadingAnchor.constraint(equalTo: orWith.trailingAnchor, constant: 8),
-            diver2.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            diver2.trailingAnchor.constraint(equalTo: colum.trailingAnchor),
             diver2.centerYAnchor.constraint(equalTo: orWith.centerYAnchor),
             diver2.heightAnchor.constraint(equalToConstant: 1),
             
-            //google button
-            googleSignInButton.topAnchor.constraint(equalTo: orWith.bottomAnchor,constant: 30),
-            googleSignInButton.widthAnchor.constraint(equalTo:scrollView.widthAnchor),
+            // Google button
+            googleSignInButton.topAnchor.constraint(equalTo: orWith.bottomAnchor, constant: 30),
+            googleSignInButton.widthAnchor.constraint(equalTo: colum.widthAnchor),
             
-            appleSignInButton.topAnchor.constraint(equalTo: googleSignInButton.bottomAnchor,constant: 10),
-            appleSignInButton.widthAnchor.constraint(equalTo:scrollView.widthAnchor),
+            // Apple button
+            appleSignInButton.topAnchor.constraint(equalTo: googleSignInButton.bottomAnchor, constant: 10),
+            appleSignInButton.widthAnchor.constraint(equalTo: colum.widthAnchor),
             
-            
+            // Ensure colum's height is determined by its content
+            colum.bottomAnchor.constraint(equalTo: appleSignInButton.bottomAnchor, constant: 20),
         ])
     }
 }

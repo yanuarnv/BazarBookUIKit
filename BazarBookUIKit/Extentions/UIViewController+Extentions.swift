@@ -2,6 +2,7 @@ import UIKit
 
 // navigation Extentions
 extension UIViewController {
+
     enum Navigation {
         //onboarding
         case onboardingView
@@ -14,35 +15,38 @@ extension UIViewController {
     }
     
     func push ( from: UIViewController,to navigation: Navigation,replace:Bool = false){
-        var viewController: UIViewController?
+        let targetVC: UIViewController
         switch navigation {
         case .onboardingView:
-            viewController =  OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+            targetVC =  OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         case .homeView:
-            viewController =  HomeViewController()
+            targetVC =  HomeViewController()
         case .signUpView:
-            viewController =  SignUpViewController()
+            targetVC =  SignUpViewController()
         case .signInView:
-            viewController =  SignInViewController()
+            targetVC =  SignInViewController()
         case .forgotPasswordView:
-            viewController = ForgotPasswordViewController()
+            targetVC = ForgotPasswordViewController()
         }
         
-        if let vc = viewController {
-            if replace{
-                from.navigationController?.setViewControllers([vc], animated: true)
-            }else{
-                from.navigationController?.pushViewController(vc, animated: true)
-            }
-        }else{
-            debugPrint("❌ NavigationController not found, presenting \(String(describing: viewController)) instead.")
+        guard let navigationController = from.navigationController else {
+            from.present(targetVC, animated: true, completion: nil)
+        
+            return
         }
+        
+        if replace {
+            navigationController.setViewControllers([targetVC], animated: true)
+        } else {
+            navigationController.pushViewController(targetVC, animated: true)
+        }
+        
+        
     }
     
     
     static func initializeNavigationController() -> UINavigationController {
-        let initialVc = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        let navController = UINavigationController(rootViewController: initialVc)
-        return navController
+        let initialVC = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        return UINavigationController(rootViewController: initialVC)
     }
 }

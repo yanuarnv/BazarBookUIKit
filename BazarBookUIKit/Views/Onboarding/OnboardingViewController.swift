@@ -31,6 +31,7 @@ class OnboardingViewController: UIPageViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .red
         style()
         setup()
         layout()
@@ -42,10 +43,11 @@ extension OnboardingViewController {
         view.addSubview(bottomSection)
         view.addSubview(skipButton)
     }
+    
     func style () {
         
         signButton.configuration(title: "Sign in")
-        //signButton.addTarget(self, action: #selector(skipTapped(_:)), for: .primaryActionTriggered)
+        signButton.addTarget(self, action: #selector(signInButtonTapped), for: .primaryActionTriggered)
         
         skipButton.translatesAutoresizingMaskIntoConstraints = false
         skipButton.text = "skip"
@@ -55,6 +57,7 @@ extension OnboardingViewController {
         skipButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(skipTapped)))
         
         continueButton.configuration(title: "Continue")
+        continueButton.layer.cornerRadius = 12
         continueButton.addTarget(self, action: #selector(nextTapped(_:)), for: .primaryActionTriggered)
         
         pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)
@@ -150,6 +153,10 @@ extension OnboardingViewController {
         }
     }
     
+    @objc func signInButtonTapped(_ sender: UIButton) {
+        self.push(from: self, to: .signInView)
+    }
+    
     @IBAction func skipTapped(_ sender: UIButton) {
         let lastPageIndex = pages.count - 1
         pageControl.currentPage = lastPageIndex
@@ -172,7 +179,7 @@ extension OnboardingViewController {
 extension OnboardingViewController {
     func changeButtonTitle() {
         if pageControl.currentPage == pages.count - 1 {
-            continueButton.configuration(title: "next")
+            continueButton.configuration(title: "Get Started")
         } else {
             continueButton.configuration(title: "Continue")
         }
