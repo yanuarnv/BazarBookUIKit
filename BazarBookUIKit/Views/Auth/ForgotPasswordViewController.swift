@@ -64,8 +64,6 @@ extension ForgotPasswordViewController {
     
     func style() {
         
-        
-        
         [forgotPasswordTitle,forgotPasswordDescription,forgotPasswordMethodContainer,emailCard,phoneCard,continueButton].forEach{
             $0.translatesAutoresizingMaskIntoConstraints = false
         }

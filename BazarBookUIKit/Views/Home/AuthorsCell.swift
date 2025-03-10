@@ -1,0 +1,67 @@
+
+import UIKit
+class  AuthorsCell: UICollectionViewCell {
+    
+    private let colum = {
+        let colum = UIStackView()
+        colum.axis = .vertical
+        colum.alignment = .leading
+        colum.spacing = 8
+        return colum
+    }()
+    
+    let title:UILabel = {
+        let label = UILabel()
+        label.text = "Title"
+        label.font = .body
+        return label
+    }()
+    
+    let subTitle:UILabel = {
+        let label = UILabel()
+        label.text = "Sub title"
+        label.textColor = .textSecondary
+        label.font = .subHead
+        return label
+    }()
+    
+    var image:UIImageView = {
+        let img =  UIImageView(image:UIImage(named: "exampleTopWeekImg")!)
+        img.clipsToBounds = true
+        img.layer.cornerRadius = 65
+        img.contentMode = .scaleAspectFill
+        return img
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        //setup
+        [image,title,subTitle].forEach{
+            colum.addArrangedSubview($0)
+        }
+        addSubview(colum)
+        //layout
+        [colum,title,subTitle,image].forEach{
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        NSLayoutConstraint.activate([
+            //image
+            image.heightAnchor.constraint(equalToConstant: 130),
+            image.widthAnchor.constraint(equalToConstant: 130),
+            //colum
+            colum.centerYAnchor.constraint(equalTo: centerYAnchor),
+            colum.centerXAnchor.constraint(equalTo: centerXAnchor),
+        ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+}
+#Preview{
+    AuthorsCell()
+}
+
+

@@ -4,6 +4,7 @@ class  CarouselSliderCell: UICollectionViewCell {
         let row = UIStackView()
         row.axis = .horizontal
         row.alignment = .center
+        row.distribution = .equalSpacing
         return row
     }()
     
@@ -11,6 +12,7 @@ class  CarouselSliderCell: UICollectionViewCell {
         let colum = UIStackView()
         colum.axis = .vertical
         colum.alignment = .leading
+        colum.distribution = .equalSpacing
         colum.spacing = 8
         return colum
     }()
@@ -54,22 +56,25 @@ class  CarouselSliderCell: UICollectionViewCell {
         [colum,row,title,subTitle,image,buttonOrder].forEach{
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
         NSLayoutConstraint.activate([
-            //image
+            // Image constraints
             image.heightAnchor.constraint(equalToConstant: 165),
             image.widthAnchor.constraint(equalToConstant: 140),
-            
-            colum.bottomAnchor.constraint(equalTo: buttonOrder.bottomAnchor),
-            colum.leadingAnchor.constraint(equalTo: row.leadingAnchor,constant: 16),
-            
-            row.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            image.trailingAnchor.constraint(equalTo: row.trailingAnchor, constant: -16), // Ensure image is within row
+
+            // Column constraints
+            colum.bottomAnchor.constraint(lessThanOrEqualTo: row.bottomAnchor), // Avoid strict bottom constraint
+            colum.leadingAnchor.constraint(equalTo: row.leadingAnchor, constant: 16),
+
+            // Row constraints
+            row.topAnchor.constraint(equalTo: topAnchor, constant: 16), // Avoid safeAreaLayoutGuide in cells
             row.leadingAnchor.constraint(equalTo: leadingAnchor),
             row.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            bottomAnchor.constraint(equalTo: row.bottomAnchor)
-            
-            
+            bottomAnchor.constraint(equalTo: row.bottomAnchor, constant: 16) // Provide spacing
         ])
+
     }
     
     required init?(coder: NSCoder) {

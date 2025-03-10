@@ -1,7 +1,12 @@
 import UIKit
 class CarouselSlider:UIView{
     
-    var cells:[HomeBannerModel] = []
+    var cells:[HomeBannerModel] = []{
+        didSet{
+            carouselSlider.reloadData()
+            pageControl.numberOfPages = cells.count
+        }
+    }
     
     private var currentIndex: Int = 0 {
         didSet{

@@ -2,7 +2,7 @@ import UIKit
 
 // navigation Extentions
 extension UIViewController {
-
+    
     enum Navigation {
         //onboarding
         case onboardingView
@@ -28,13 +28,10 @@ extension UIViewController {
         case .forgotPasswordView:
             targetVC = ForgotPasswordViewController()
         }
-        
         guard let navigationController = from.navigationController else {
-            from.present(targetVC, animated: true, completion: nil)
-        
+            print("navigation nil")
             return
         }
-        
         if replace {
             navigationController.setViewControllers([targetVC], animated: true)
         } else {
