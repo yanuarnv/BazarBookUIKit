@@ -1,2 +1,2 @@
-API_KEY = "AIzaSyBlReoGBdGfKLPIpxqzXp14j27DRXM9VRE"
-
+API_KEY = AIzaSyBlReoGBdGfKLPIpxqzXp14j27DRXM9VRE
+BASE_URL = https:/$()/www.googleapis.com/

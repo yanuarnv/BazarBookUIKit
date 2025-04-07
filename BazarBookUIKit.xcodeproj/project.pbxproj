@@ -25,6 +25,9 @@
 		E44B14E92C8968020082FB19 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = E44B14E82C8968020082FB19 /* Base */; };
 		E45DD5512C8DB035009D8B87 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45DD5502C8DB035009D8B87 /* PrimaryButton.swift */; };
 		E46558512CFD64000042EC57 /* BazarTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46558502CFD63E20042EC57 /* BazarTextField.swift */; };
+		E47101402D87143600273D00 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E471013F2D87142C00273D00 /* HomeViewModel.swift */; };
+		E47101422D8D0D7500273D00 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47101412D8D0D6500273D00 /* BookModel.swift */; };
+		E47101442D8D113100273D00 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E47101432D8D113100273D00 /* Development.xcconfig */; };
 		E478FD402C8B51F5005A84F4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E478FD3F2C8B51F5005A84F4 /* OnboardingViewController.swift */; };
 		E478FD422C8B5BA1005A84F4 /* OnboardingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E478FD412C8B5BA1005A84F4 /* OnboardingItemViewController.swift */; };
 		E478FD4A2C8B65B6005A84F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E478FD492C8B65B6005A84F4 /* SceneDelegate.swift */; };
@@ -60,13 +63,16 @@
 		E42E92CD2D7DF13C003047CB /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		E43CE0502CB43C9D007E108D /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		E4402EFC2D3E603500578DCA /* SosialMediaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SosialMediaButton.swift; sourceTree = "<group>"; };
-		E44B14D92C8968010082FB19 /* BazarBookUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BazarBookUIKit.app; path = "/Users/yanuarnvl/AcademyProjects/BazarBookUIKit/build/Debug-iphoneos/BazarBookUIKit.app"; sourceTree = "<absolute>"; };
 		E44B14DC2C8968010082FB19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E44B14E52C8968020082FB19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E44B14E82C8968020082FB19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E44B14EA2C8968020082FB19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E45DD5502C8DB035009D8B87 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		E46558502CFD63E20042EC57 /* BazarTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BazarTextField.swift; sourceTree = "<group>"; };
+		E471013D2D85DAF500273D00 /* BazarBookUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BazarBookUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E471013F2D87142C00273D00 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E47101412D8D0D6500273D00 /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
+		E47101432D8D113100273D00 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		E478FD3F2C8B51F5005A84F4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E478FD412C8B5BA1005A84F4 /* OnboardingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItemViewController.swift; sourceTree = "<group>"; };
 		E478FD492C8B65B6005A84F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				E44B14DB2C8968010082FB19 /* BazarBookUIKit */,
+				E471013D2D85DAF500273D00 /* BazarBookUIKit.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,10 +166,12 @@
 				E4D16FD52CB8D19F00EDC88A /* Extentions */,
 				E43CE08C2CB4486E007E108D /* Fonts */,
 				E478FD4F2C8C3EE2005A84F4 /* Models */,
+				E471013E2D87140900273D00 /* ViewModels */,
 				E4D16FD22CB8D0F100EDC88A /* Views */,
 				E44B14E52C8968020082FB19 /* Assets.xcassets */,
 				E44B14E72C8968020082FB19 /* LaunchScreen.storyboard */,
 				E44B14EA2C8968020082FB19 /* Info.plist */,
+				E47101432D8D113100273D00 /* Development.xcconfig */,
 			);
 			path = BazarBookUIKit;
 			sourceTree = "<group>";
@@ -176,6 +185,14 @@
 				E43CE0502CB43C9D007E108D /* SecondaryButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		E471013E2D87140900273D00 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E471013F2D87142C00273D00 /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		E478FD3B2C8B1F68005A84F4 /* Auth */ = {
@@ -201,6 +218,7 @@
 		E478FD4F2C8C3EE2005A84F4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E47101412D8D0D6500273D00 /* BookModel.swift */,
 				E4DB3FA72D7632D200F168EA /* BestVendorsModel.swift */,
 				E4FC91BA2D785DD6007422E7 /* AuthorModel.swift */,
 				E4DB3F9D2D75352900F168EA /* TopOfWeekModel.swift */,
@@ -248,7 +266,7 @@
 			);
 			name = BazarBookUIKit;
 			productName = BazarBookUIKit;
-			productReference = E44B14D92C8968010082FB19 /* BazarBookUIKit.app */;
+			productReference = E471013D2D85DAF500273D00 /* BazarBookUIKit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -293,6 +311,7 @@
 				E4232E212D0003AC00D9D954 /* Inter_24pt-Regular.ttf in Resources */,
 				E4232E222D0003AC00D9D954 /* Inter_24pt-SemiBold.ttf in Resources */,
 				E4232E232D0003AC00D9D954 /* Inter_24pt-Italic.ttf in Resources */,
+				E47101442D8D113100273D00 /* Development.xcconfig in Resources */,
 				E44B14E62C8968020082FB19 /* Assets.xcassets in Resources */,
 				E44B14E92C8968020082FB19 /* Base in Resources */,
 			);
@@ -308,6 +327,7 @@
 				E43CE0512CB43C9D007E108D /* SecondaryButton.swift in Sources */,
 				E4402EFD2D3E603500578DCA /* SosialMediaButton.swift in Sources */,
 				E42E92CB2D7DF096003047CB /* MainTabbarController.swift in Sources */,
+				E47101402D87143600273D00 /* HomeViewModel.swift in Sources */,
 				E45DD5512C8DB035009D8B87 /* PrimaryButton.swift in Sources */,
 				E4DB3FA42D76311900F168EA /* BestVendorsList.swift in Sources */,
 				E46558512CFD64000042EC57 /* BazarTextField.swift in Sources */,
@@ -319,6 +339,7 @@
 				E4DB3F9E2D75353B00F168EA /* TopOfWeekModel.swift in Sources */,
 				E4DB3FA22D75F8E500F168EA /* ConstantValue.swift in Sources */,
 				E4DB3FA02D753DB300F168EA /* TopOfWeekCell.swift in Sources */,
+				E47101422D8D0D7500273D00 /* BookModel.swift in Sources */,
 				E4FC91BB2D785DD6007422E7 /* AuthorModel.swift in Sources */,
 				E478FD422C8B5BA1005A84F4 /* OnboardingItemViewController.swift in Sources */,
 				E4D16FCD2CB8C8DE00EDC88A /* SignInViewController.swift in Sources */,
@@ -355,6 +376,7 @@
 /* Begin XCBuildConfiguration section */
 		E44B14EB2C8968020082FB19 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E47101432D8D113100273D00 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -418,6 +440,7 @@
 		};
 		E44B14EC2C8968020082FB19 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E47101432D8D113100273D00 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
