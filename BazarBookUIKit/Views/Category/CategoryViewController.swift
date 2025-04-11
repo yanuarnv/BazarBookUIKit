@@ -1,7 +1,7 @@
 import UIKit
 
 class CategoryViewController: UIViewController {
-    let vm  = HomeViewModel()
+    let vm  = HomeViewModel(service: BookApiServiceImpl())
     
     let button:PrimaryButton = {
         let btn = PrimaryButton()

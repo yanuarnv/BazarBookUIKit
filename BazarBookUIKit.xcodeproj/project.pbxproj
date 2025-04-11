@@ -36,9 +36,9 @@
 		E4A804A92D6F0C520070CC91 /* CarouselSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A804A82D6F0C3D0070CC91 /* CarouselSlider.swift */; };
 		E4A804AB2D6F521C0070CC91 /* HomeBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A804AA2D6F52180070CC91 /* HomeBannerModel.swift */; };
 		E4A804AD2D709F2D0070CC91 /* TopOfWeekList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A804AC2D709F100070CC91 /* TopOfWeekList.swift */; };
+		E4C1C7112DA91C8500BE4ECF /* BookApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C1C7102DA91C6600BE4ECF /* BookApiService.swift */; };
 		E4D16FCD2CB8C8DE00EDC88A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D16FCC2CB8C89300EDC88A /* SignInViewController.swift */; };
 		E4D16FD42CB8D17400EDC88A /* Font+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D16FD32CB8D16300EDC88A /* Font+Extentions.swift */; };
-		E4DB3F9E2D75353B00F168EA /* TopOfWeekModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB3F9D2D75352900F168EA /* TopOfWeekModel.swift */; };
 		E4DB3FA02D753DB300F168EA /* TopOfWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB3F9F2D753DA800F168EA /* TopOfWeekCell.swift */; };
 		E4DB3FA22D75F8E500F168EA /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB3FA12D75F8DC00F168EA /* ConstantValue.swift */; };
 		E4DB3FA42D76311900F168EA /* BestVendorsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB3FA32D76310F00F168EA /* BestVendorsList.swift */; };
@@ -81,9 +81,9 @@
 		E4A804A82D6F0C3D0070CC91 /* CarouselSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSlider.swift; sourceTree = "<group>"; };
 		E4A804AA2D6F52180070CC91 /* HomeBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerModel.swift; sourceTree = "<group>"; };
 		E4A804AC2D709F100070CC91 /* TopOfWeekList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopOfWeekList.swift; sourceTree = "<group>"; };
+		E4C1C7102DA91C6600BE4ECF /* BookApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookApiService.swift; sourceTree = "<group>"; };
 		E4D16FCC2CB8C89300EDC88A /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		E4D16FD32CB8D16300EDC88A /* Font+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extentions.swift"; sourceTree = "<group>"; };
-		E4DB3F9D2D75352900F168EA /* TopOfWeekModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopOfWeekModel.swift; sourceTree = "<group>"; };
 		E4DB3F9F2D753DA800F168EA /* TopOfWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopOfWeekCell.swift; sourceTree = "<group>"; };
 		E4DB3FA12D75F8DC00F168EA /* ConstantValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValue.swift; sourceTree = "<group>"; };
 		E4DB3FA32D76310F00F168EA /* BestVendorsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestVendorsList.swift; sourceTree = "<group>"; };
@@ -166,6 +166,7 @@
 				E4D16FD52CB8D19F00EDC88A /* Extentions */,
 				E43CE08C2CB4486E007E108D /* Fonts */,
 				E478FD4F2C8C3EE2005A84F4 /* Models */,
+				E4C1C70F2DA91C5300BE4ECF /* Services */,
 				E471013E2D87140900273D00 /* ViewModels */,
 				E4D16FD22CB8D0F100EDC88A /* Views */,
 				E44B14E52C8968020082FB19 /* Assets.xcassets */,
@@ -221,11 +222,18 @@
 				E47101412D8D0D6500273D00 /* BookModel.swift */,
 				E4DB3FA72D7632D200F168EA /* BestVendorsModel.swift */,
 				E4FC91BA2D785DD6007422E7 /* AuthorModel.swift */,
-				E4DB3F9D2D75352900F168EA /* TopOfWeekModel.swift */,
 				E4A804AA2D6F52180070CC91 /* HomeBannerModel.swift */,
 				E478FD502C8C3EFF005A84F4 /* OnBoardingModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E4C1C70F2DA91C5300BE4ECF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E4C1C7102DA91C6600BE4ECF /* BookApiService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		E4D16FD22CB8D0F100EDC88A /* Views */ = {
@@ -256,9 +264,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E44B14ED2C8968020082FB19 /* Build configuration list for PBXNativeTarget "BazarBookUIKit" */;
 			buildPhases = (
+				C65F2E8DFFAB983CA37E4953 /* [CP] Check Pods Manifest.lock */,
 				E44B14D52C8968010082FB19 /* Sources */,
 				E44B14D62C8968010082FB19 /* Frameworks */,
 				E44B14D72C8968010082FB19 /* Resources */,
+				4A33F7E08BB1FBACBFBD434A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -319,6 +329,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4A33F7E08BB1FBACBFBD434A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BazarBookUIKit/Pods-BazarBookUIKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BazarBookUIKit/Pods-BazarBookUIKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BazarBookUIKit/Pods-BazarBookUIKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C65F2E8DFFAB983CA37E4953 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BazarBookUIKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E44B14D52C8968010082FB19 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -336,7 +388,6 @@
 				E40CC4882D632E17000990CD /* UIViewController+Extentions.swift in Sources */,
 				E478FD402C8B51F5005A84F4 /* OnboardingViewController.swift in Sources */,
 				E4D16FD42CB8D17400EDC88A /* Font+Extentions.swift in Sources */,
-				E4DB3F9E2D75353B00F168EA /* TopOfWeekModel.swift in Sources */,
 				E4DB3FA22D75F8E500F168EA /* ConstantValue.swift in Sources */,
 				E4DB3FA02D753DB300F168EA /* TopOfWeekCell.swift in Sources */,
 				E47101422D8D0D7500273D00 /* BookModel.swift in Sources */,
@@ -351,6 +402,7 @@
 				E42E92CE2D7DF142003047CB /* CategoryViewController.swift in Sources */,
 				E40CC4862D63277F000990CD /* HomeViewController.swift in Sources */,
 				E4FC91B72D785A5C007422E7 /* AuthorsList.swift in Sources */,
+				E4C1C7112DA91C8500BE4ECF /* BookApiService.swift in Sources */,
 				E4DB3FA62D76312600F168EA /* BestVendorsCell.swift in Sources */,
 				E4DB3FA82D7632D700F168EA /* BestVendorsModel.swift in Sources */,
 				E41F66B92D4FB42A00CB6D4A /* ForgotPasswordViewController.swift in Sources */,

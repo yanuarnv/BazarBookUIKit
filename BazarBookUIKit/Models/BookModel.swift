@@ -3,7 +3,7 @@
 import Foundation
 
 // MARK: - Book
-struct Book: Codable {
+struct BookModel: Codable {
     let kind: String
     let totalItems: Int
     let items: [BookItem]
@@ -162,3 +162,77 @@ struct ReadingModes: Codable {
     let text, image: Bool
 }
 
+extension BookModel {
+    static func dummy() -> [BookItem] {
+        var list = [
+            BookItem(
+                kind: .booksVolume,
+                id: "dummyID",
+                etag: "etag123",
+                selfLink: "https://www.googleapis.com/books/v1/volumes/dummyID",
+                volumeInfo: VolumeInfo(
+                    title: "Swift Programming for Beginners",
+                    authors: ["John Appleseed"],
+                    publisher: "Apple Press",
+                    publishedDate: "2023-01-01",
+                    description: "A comprehensive guide to learning Swift programming.",
+                    industryIdentifiers: [
+                        IndustryIdentifier(type: .isbn10, identifier: "1234567890"),
+                        IndustryIdentifier(type: .isbn13, identifier: "9781234567897")
+                    ],
+                    readingModes: ReadingModes(text: true, image: false),
+                    pageCount: 350,
+                    printType: .book,
+                    categories: ["Programming", "iOS Development"],
+                    maturityRating: .notMature,
+                    allowAnonLogging: true,
+                    contentVersion: "1.0.0.0",
+                    panelizationSummary: PanelizationSummary(containsEpubBubbles: false, containsImageBubbles: false),
+                    imageLinks: ImageLinks(
+                        smallThumbnail: "https://via.placeholder.com/128x196.png?text=Small+Thumbnail",
+                        thumbnail: "https://via.placeholder.com/128x196.png?text=Thumbnail"
+                    ),
+                    language: .en,
+                    previewLink: "https://books.google.com/previewlink",
+                    infoLink: "https://books.google.com/infolink",
+                    canonicalVolumeLink: "https://books.google.com/canonicalvolumelink",
+                    subtitle: "A Beginner's Guide",
+                    averageRating: 4,
+                    ratingsCount: 120
+                ),
+                saleInfo: SaleInfo(
+                    country: .id,
+                    saleability: .forSale,
+                    isEbook: true,
+                    listPrice: SaleInfoListPrice(amount: 100000, currencyCode: .idr),
+                    retailPrice: SaleInfoListPrice(amount: 85000, currencyCode: .idr),
+                    buyLink: "https://books.google.com/buylink",
+                    offers: [
+                        Offer(
+                            finskyOfferType: 1,
+                            listPrice: OfferListPrice(amountInMicros: 100000000, currencyCode: .idr),
+                            retailPrice: OfferListPrice(amountInMicros: 85000000, currencyCode: .idr)
+                        )
+                    ]
+                ),
+                accessInfo: AccessInfo(
+                    country: .id,
+                    viewability: .partial,
+                    embeddable: true,
+                    publicDomain: false,
+                    textToSpeechPermission: .allowed,
+                    epub: Epub(isAvailable: true, acsTokenLink: nil),
+                    pdf: Epub(isAvailable: false, acsTokenLink: nil),
+                    webReaderLink: "https://books.google.com/webreaderlink",
+                    accessViewStatus: .sample,
+                    quoteSharingAllowed: true
+                ),
+                searchInfo: SearchInfo(
+                    textSnippet: "Learn the basics of Swift programming in this beginner-friendly book."
+                )
+            )
+        ]
+        
+        return list
+    }
+}

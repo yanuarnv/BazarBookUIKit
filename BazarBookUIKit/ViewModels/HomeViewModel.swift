@@ -1,20 +1,20 @@
 import Foundation
 @Observable
 class HomeViewModel{
+    var service:BookApiService
     var books: [BookItem] = []
+    
+    init(service: BookApiService) {
+        self.service = service
+    }
     func getBooks()async throws {
-        
-        guard let url = URL(string: "\(Keys.baseURL)books/v1/volumes?q=search+terms&key=\(Keys.apiKey)") else {
-            throw NSError(domain: "MyApp", code: 2, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
+        let result = try await service.getBooks()
+        switch result{
+        case .success(let data):
+            books = data
+        case .failure(let error):
+            print(error)
         }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        let (data, _) = try await URLSession.shared.data(for: request)
-        
-        let decode = try JSONDecoder().decode(Book.self, from: data)
-        print(decode)
     }
 }
 
