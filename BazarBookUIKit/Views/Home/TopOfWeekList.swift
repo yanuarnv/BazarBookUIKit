@@ -1,5 +1,5 @@
 import UIKit
-
+import SDWebImage
 class TopOfWeekList: UIView, UICollectionViewDelegate {
     
     override init(frame: CGRect) {
@@ -11,7 +11,7 @@ class TopOfWeekList: UIView, UICollectionViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var data: [TopOfWeekModel] = [] {
+    var data: [BookItem] = [] {
         didSet {
             collectionView.reloadData()
         }
@@ -100,9 +100,13 @@ extension TopOfWeekList: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let item = data[indexPath.item]
-        cell.title.text = item.title
-        cell.subTitle.text = item.subtitle
-        cell.image.image = UIImage(named: item.image)
+        cell.title.text = item.volumeInfo.title
+        cell.subTitle.text = item.volumeInfo.description
+        if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
+            cell.image.sd_setImage(with: imgLink,placeholderImage: UIImage(named: "loading_placeholder"))
+        }
+        
+
         return cell
     }
 }
@@ -116,7 +120,7 @@ extension TopOfWeekList:UICollectionViewDelegateFlowLayout{
 // MARK: - Preview
 #Preview {
     let list = TopOfWeekList()
-    list.data = TopOfWeekModel.dummy()
+    list.data = BookModel.dummy()
     return list
 }
 

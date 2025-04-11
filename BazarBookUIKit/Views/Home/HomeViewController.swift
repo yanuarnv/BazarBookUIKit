@@ -1,7 +1,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    
+    private let viewmodel = HomeViewModel(service: BookApiServiceImpl())
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     
     private let topOfWeekList: TopOfWeekList = {
         let list = TopOfWeekList()
-        list.data = TopOfWeekModel.dummy()
+        list.data = BookModel.dummy()
         return list
     }()
     
@@ -45,6 +45,9 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Task{
+            try await viewmodel.getBooks()
+        }
         view.backgroundColor = .white
         self.title = "Home"
         setup()

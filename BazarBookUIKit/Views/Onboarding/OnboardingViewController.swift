@@ -168,7 +168,7 @@ extension OnboardingViewController {
             pageControl.currentPage += 1
             goToNextPage()
         }else{
-            self.push(from: self, to: .homeView,replace: true)
+            self.push(from: self, to: .mainView,replace: true)
         }
         
         

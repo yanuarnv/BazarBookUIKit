@@ -8,6 +8,7 @@ extension UIViewController {
         case onboardingView
         //home
         case homeView
+        case mainView
         // auth
         case signUpView
         case signInView
@@ -21,6 +22,8 @@ extension UIViewController {
             targetVC =  OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         case .homeView:
             targetVC =  HomeViewController()
+        case .mainView:
+            targetVC = MainTabbarController()
         case .signUpView:
             targetVC =  SignUpViewController()
         case .signInView:

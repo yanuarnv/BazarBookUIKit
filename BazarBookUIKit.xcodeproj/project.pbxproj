@@ -321,6 +321,7 @@
 				E43CE0512CB43C9D007E108D /* SecondaryButton.swift in Sources */,
 				E4402EFD2D3E603500578DCA /* SosialMediaButton.swift in Sources */,
 				E42E92CB2D7DF096003047CB /* MainTabbarController.swift in Sources */,
+				E47101402D87143600273D00 /* HomeViewModel.swift in Sources */,
 				E45DD5512C8DB035009D8B87 /* PrimaryButton.swift in Sources */,
 				E4DB3FA42D76311900F168EA /* BestVendorsList.swift in Sources */,
 				E46558512CFD64000042EC57 /* BazarTextField.swift in Sources */,
@@ -332,6 +333,7 @@
 				E4DB3F9E2D75353B00F168EA /* TopOfWeekModel.swift in Sources */,
 				E4DB3FA22D75F8E500F168EA /* ConstantValue.swift in Sources */,
 				E4DB3FA02D753DB300F168EA /* TopOfWeekCell.swift in Sources */,
+				E47101422D8D0D7500273D00 /* BookModel.swift in Sources */,
 				E4FC91BB2D785DD6007422E7 /* AuthorModel.swift in Sources */,
 				E478FD422C8B5BA1005A84F4 /* OnboardingItemViewController.swift in Sources */,
 				E4D16FCD2CB8C8DE00EDC88A /* SignInViewController.swift in Sources */,
@@ -343,6 +345,7 @@
 				E42E92CE2D7DF142003047CB /* CategoryViewController.swift in Sources */,
 				E40CC4862D63277F000990CD /* HomeViewController.swift in Sources */,
 				E4FC91B72D785A5C007422E7 /* AuthorsList.swift in Sources */,
+				E4C1C7112DA91C8500BE4ECF /* BookApiService.swift in Sources */,
 				E4DB3FA62D76312600F168EA /* BestVendorsCell.swift in Sources */,
 				E4C1C71E2DA9643400BE4ECF /* BooksModel.swift in Sources */,
 				E4DB3FA82D7632D700F168EA /* BestVendorsModel.swift in Sources */,
@@ -433,6 +436,7 @@
 		};
 		E44B14EC2C8968020082FB19 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E47101432D8D113100273D00 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
