@@ -126,7 +126,7 @@ struct VolumeInfo: Codable {
 
 // MARK: - ImageLinks
 struct ImageLinks: Codable {
-    let smallThumbnail, thumbnail: String
+    let smallThumbnail, thumbnail: String 
 }
 
 // MARK: - IndustryIdentifier
@@ -190,7 +190,7 @@ extension BookModel {
                     panelizationSummary: PanelizationSummary(containsEpubBubbles: false, containsImageBubbles: false),
                     imageLinks: ImageLinks(
                         smallThumbnail: "https://via.placeholder.com/128x196.png?text=Small+Thumbnail",
-                        thumbnail: "https://via.placeholder.com/128x196.png?text=Thumbnail"
+                        thumbnail: "https://images.unsplash.com/photo-1587691592099-24045742c181?q=80&w=2946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     ),
                     language: .en,
                     previewLink: "https://books.google.com/previewlink",

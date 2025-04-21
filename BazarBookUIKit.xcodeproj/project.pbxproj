@@ -35,10 +35,11 @@
 		E4A804AD2D709F2D0070CC91 /* TopOfWeekList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A804AC2D709F100070CC91 /* TopOfWeekList.swift */; };
 		E4C1C71A2DA963CB00BE4ECF /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = E4C1C7192DA963CB00BE4ECF /* SDWebImage */; };
 		E4C1C71C2DA963CB00BE4ECF /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C1C71B2DA963CB00BE4ECF /* SDWebImageMapKit */; };
-		E4C1C71E2DA9643400BE4ECF /* BooksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C1C71D2DA9642C00BE4ECF /* BooksModel.swift */; };
+		E4C1C7252DA969CC00BE4ECF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C1C7232DA969CC00BE4ECF /* HomeViewModel.swift */; };
+		E4C1C7282DA969F200BE4ECF /* BookApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C1C7262DA969F200BE4ECF /* BookApiService.swift */; };
+		E4C1C72A2DA96A1E00BE4ECF /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C1C7292DA96A1E00BE4ECF /* BookModel.swift */; };
 		E4D16FCD2CB8C8DE00EDC88A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D16FCC2CB8C89300EDC88A /* SignInViewController.swift */; };
 		E4D16FD42CB8D17400EDC88A /* Font+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D16FD32CB8D16300EDC88A /* Font+Extentions.swift */; };
-		E4DB3F9E2D75353B00F168EA /* TopOfWeekModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB3F9D2D75352900F168EA /* TopOfWeekModel.swift */; };
 		E4DB3FA02D753DB300F168EA /* TopOfWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB3F9F2D753DA800F168EA /* TopOfWeekCell.swift */; };
 		E4DB3FA22D75F8E500F168EA /* ConstantValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB3FA12D75F8DC00F168EA /* ConstantValue.swift */; };
 		E4DB3FA42D76311900F168EA /* BestVendorsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB3FA32D76310F00F168EA /* BestVendorsList.swift */; };
@@ -78,11 +79,12 @@
 		E4A804AA2D6F52180070CC91 /* HomeBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerModel.swift; sourceTree = "<group>"; };
 		E4A804AC2D709F100070CC91 /* TopOfWeekList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopOfWeekList.swift; sourceTree = "<group>"; };
 		E4C1C7172DA9634300BE4ECF /* BazarBookUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BazarBookUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4C1C71D2DA9642C00BE4ECF /* BooksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksModel.swift; sourceTree = "<group>"; };
 		E4C1C71F2DA964B500BE4ECF /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		E4C1C7232DA969CC00BE4ECF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E4C1C7262DA969F200BE4ECF /* BookApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookApiService.swift; sourceTree = "<group>"; };
+		E4C1C7292DA96A1E00BE4ECF /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
 		E4D16FCC2CB8C89300EDC88A /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		E4D16FD32CB8D16300EDC88A /* Font+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extentions.swift"; sourceTree = "<group>"; };
-		E4DB3F9D2D75352900F168EA /* TopOfWeekModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopOfWeekModel.swift; sourceTree = "<group>"; };
 		E4DB3F9F2D753DA800F168EA /* TopOfWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopOfWeekCell.swift; sourceTree = "<group>"; };
 		E4DB3FA12D75F8DC00F168EA /* ConstantValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantValue.swift; sourceTree = "<group>"; };
 		E4DB3FA32D76310F00F168EA /* BestVendorsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestVendorsList.swift; sourceTree = "<group>"; };
@@ -163,10 +165,12 @@
 		E44B14DB2C8968010082FB19 /* BazarBookUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				E4C1C7272DA969F200BE4ECF /* Services */,
 				E40CC4812D632505000990CD /* Applications */,
 				E4D16FD52CB8D19F00EDC88A /* Extentions */,
 				E43CE08C2CB4486E007E108D /* Fonts */,
 				E478FD4F2C8C3EE2005A84F4 /* Models */,
+				E4C1C7242DA969CC00BE4ECF /* ViewModels */,
 				E4D16FD22CB8D0F100EDC88A /* Views */,
 				E44B14E52C8968020082FB19 /* Assets.xcassets */,
 				E44B14E72C8968020082FB19 /* LaunchScreen.storyboard */,
@@ -210,14 +214,29 @@
 		E478FD4F2C8C3EE2005A84F4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E4C1C71D2DA9642C00BE4ECF /* BooksModel.swift */,
+				E4C1C7292DA96A1E00BE4ECF /* BookModel.swift */,
 				E4DB3FA72D7632D200F168EA /* BestVendorsModel.swift */,
 				E4FC91BA2D785DD6007422E7 /* AuthorModel.swift */,
-				E4DB3F9D2D75352900F168EA /* TopOfWeekModel.swift */,
 				E4A804AA2D6F52180070CC91 /* HomeBannerModel.swift */,
 				E478FD502C8C3EFF005A84F4 /* OnBoardingModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E4C1C7242DA969CC00BE4ECF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E4C1C7232DA969CC00BE4ECF /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E4C1C7272DA969F200BE4ECF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E4C1C7262DA969F200BE4ECF /* BookApiService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		E4D16FD22CB8D0F100EDC88A /* Views */ = {
@@ -321,7 +340,7 @@
 				E43CE0512CB43C9D007E108D /* SecondaryButton.swift in Sources */,
 				E4402EFD2D3E603500578DCA /* SosialMediaButton.swift in Sources */,
 				E42E92CB2D7DF096003047CB /* MainTabbarController.swift in Sources */,
-				E47101402D87143600273D00 /* HomeViewModel.swift in Sources */,
+				E4C1C7252DA969CC00BE4ECF /* HomeViewModel.swift in Sources */,
 				E45DD5512C8DB035009D8B87 /* PrimaryButton.swift in Sources */,
 				E4DB3FA42D76311900F168EA /* BestVendorsList.swift in Sources */,
 				E46558512CFD64000042EC57 /* BazarTextField.swift in Sources */,
@@ -330,11 +349,10 @@
 				E40CC4882D632E17000990CD /* UIViewController+Extentions.swift in Sources */,
 				E478FD402C8B51F5005A84F4 /* OnboardingViewController.swift in Sources */,
 				E4D16FD42CB8D17400EDC88A /* Font+Extentions.swift in Sources */,
-				E4DB3F9E2D75353B00F168EA /* TopOfWeekModel.swift in Sources */,
 				E4DB3FA22D75F8E500F168EA /* ConstantValue.swift in Sources */,
 				E4DB3FA02D753DB300F168EA /* TopOfWeekCell.swift in Sources */,
-				E47101422D8D0D7500273D00 /* BookModel.swift in Sources */,
 				E4FC91BB2D785DD6007422E7 /* AuthorModel.swift in Sources */,
+				E4C1C72A2DA96A1E00BE4ECF /* BookModel.swift in Sources */,
 				E478FD422C8B5BA1005A84F4 /* OnboardingItemViewController.swift in Sources */,
 				E4D16FCD2CB8C8DE00EDC88A /* SignInViewController.swift in Sources */,
 				E41E15F72D4E75A3009C15BF /* SignUpViewController.swift in Sources */,
@@ -345,9 +363,8 @@
 				E42E92CE2D7DF142003047CB /* CategoryViewController.swift in Sources */,
 				E40CC4862D63277F000990CD /* HomeViewController.swift in Sources */,
 				E4FC91B72D785A5C007422E7 /* AuthorsList.swift in Sources */,
-				E4C1C7112DA91C8500BE4ECF /* BookApiService.swift in Sources */,
 				E4DB3FA62D76312600F168EA /* BestVendorsCell.swift in Sources */,
-				E4C1C71E2DA9643400BE4ECF /* BooksModel.swift in Sources */,
+				E4C1C7282DA969F200BE4ECF /* BookApiService.swift in Sources */,
 				E4DB3FA82D7632D700F168EA /* BestVendorsModel.swift in Sources */,
 				E41F66B92D4FB42A00CB6D4A /* ForgotPasswordViewController.swift in Sources */,
 				E44B14DD2C8968010082FB19 /* AppDelegate.swift in Sources */,
@@ -436,7 +453,6 @@
 		};
 		E44B14EC2C8968020082FB19 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E47101432D8D113100273D00 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

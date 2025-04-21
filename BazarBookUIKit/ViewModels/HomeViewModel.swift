@@ -1,7 +1,7 @@
 import Foundation
 @Observable
 class HomeViewModel{
-    var service:BookApiService
+    private var service:BookApiService
     var books: [BookItem] = []
     
     init(service: BookApiService) {

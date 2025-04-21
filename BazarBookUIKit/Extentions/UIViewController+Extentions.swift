@@ -46,7 +46,8 @@ extension UIViewController {
     
     
     static func initializeNavigationController() -> UINavigationController {
-        let initialVC = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+//        let initialVC = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        let initialVC = MainTabbarController()
         return UINavigationController(rootViewController: initialVC)
     }
 }

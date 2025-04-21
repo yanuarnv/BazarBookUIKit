@@ -14,6 +14,8 @@ class  TopOfWeekCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Title"
         label.font = .body
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
@@ -51,6 +53,7 @@ class  TopOfWeekCell: UICollectionViewCell {
             //colum
             colum.centerYAnchor.constraint(equalTo: centerYAnchor),
             colum.centerXAnchor.constraint(equalTo: centerXAnchor),
+            colum.widthAnchor.constraint(equalToConstant: 130)
         ])
     }
     
@@ -61,6 +64,11 @@ class  TopOfWeekCell: UICollectionViewCell {
     
 }
 #Preview{
-    TopOfWeekCell()
+    var widget = TopOfWeekCell()
+    let item = BookModel.dummy().first!
+    widget.title.text = item.volumeInfo.title
+    widget.subTitle.text = item.volumeInfo.description
+    widget.image.image = UIImage(systemName: "photo.fill")
+    return widget
 }
 

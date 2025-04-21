@@ -11,9 +11,15 @@ class TopOfWeekList: UIView, UICollectionViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var data: [BookItem] = [] {
-        didSet {
+    
+    private let viewModel: HomeViewModel = HomeViewModel(service: BookApiServiceImpl())
+    
+    func loadData()async{
+        do{
+            try await viewModel.getBooks()
             collectionView.reloadData()
+        }catch{
+            print(error)
         }
     }
     
@@ -92,21 +98,23 @@ extension TopOfWeekList {
 extension TopOfWeekList: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return viewModel.books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopOfWeekCell", for: indexPath) as? TopOfWeekCell else {
             return UICollectionViewCell()
         }
-        let item = data[indexPath.item]
+        let item = viewModel.books[indexPath.item]
         cell.title.text = item.volumeInfo.title
         cell.subTitle.text = item.volumeInfo.description
         if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
-            cell.image.sd_setImage(with: imgLink,placeholderImage: UIImage(named: "loading_placeholder"))
+            print("load image not null")
+            cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
         }
         
-
+        
+        
         return cell
     }
 }
@@ -120,7 +128,6 @@ extension TopOfWeekList:UICollectionViewDelegateFlowLayout{
 // MARK: - Preview
 #Preview {
     let list = TopOfWeekList()
-    list.data = BookModel.dummy()
     return list
 }
 

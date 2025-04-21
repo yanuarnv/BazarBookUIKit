@@ -27,7 +27,6 @@ class HomeViewController: UIViewController {
     
     private let topOfWeekList: TopOfWeekList = {
         let list = TopOfWeekList()
-        list.data = BookModel.dummy()
         return list
     }()
     
@@ -46,7 +45,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Task{
-            try await viewmodel.getBooks()
+            await topOfWeekList.loadData()
         }
         view.backgroundColor = .white
         self.title = "Home"
