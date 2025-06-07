@@ -88,5 +88,13 @@ extension CarouselSlider :UICollectionViewDelegateFlowLayout{
 }
 
 #Preview{
-    CarouselSlider()
+    let slider = CarouselSlider()
+    let data = [
+        HomeBannerModel(title: "title", subTitle: "subTitle", imageName: "example_banner"),
+        HomeBannerModel(title: "title", subTitle: "subTitle", imageName: "example_banner"),
+        HomeBannerModel(title: "title", subTitle: "subTitle", imageName: "example_banner"),
+    ]
+    slider.cells = data
+    slider.pageControl.numberOfPages = data.count
+    return slider
 }

@@ -8,6 +8,7 @@ extension UIViewController {
         case onboardingView
         //home
         case homeView
+        case mainView
         // auth
         case signUpView
         case signInView
@@ -21,6 +22,8 @@ extension UIViewController {
             targetVC =  OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         case .homeView:
             targetVC =  HomeViewController()
+        case .mainView:
+            targetVC = MainTabbarController()
         case .signUpView:
             targetVC =  SignUpViewController()
         case .signInView:
@@ -29,8 +32,7 @@ extension UIViewController {
             targetVC = ForgotPasswordViewController()
         }
         guard let navigationController = from.navigationController else {
-            print("navigation nil")
-            return
+            fatalError("\(from) navigatonController not found")
         }
         if replace {
             navigationController.setViewControllers([targetVC], animated: true)
@@ -41,9 +43,4 @@ extension UIViewController {
         
     }
     
-    
-    static func initializeNavigationController() -> UINavigationController {
-        let initialVC = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        return UINavigationController(rootViewController: initialVC)
-    }
 }

@@ -1,6 +1,7 @@
 import UIKit
-
+import SDWebImage
 class TopOfWeekList: UIView, UICollectionViewDelegate {
+    @Inject private var viewModel: HomeViewModel
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -10,11 +11,13 @@ class TopOfWeekList: UIView, UICollectionViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    var data: [TopOfWeekModel] = [] {
-        didSet {
-            collectionView.reloadData()
+    // make sure run in main thread
+    @MainActor
+    func loadData()async{
+        await viewModel.getTopOfWeekBooks(maxResult: 6){error in
+          
         }
+        collectionView.reloadData()
     }
     
     // CollectionView Layout
@@ -92,17 +95,20 @@ extension TopOfWeekList {
 extension TopOfWeekList: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return viewModel.topOfWeekList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopOfWeekCell", for: indexPath) as? TopOfWeekCell else {
             return UICollectionViewCell()
         }
-        let item = data[indexPath.item]
-        cell.title.text = item.title
-        cell.subTitle.text = item.subtitle
-        cell.image.image = UIImage(named: item.image)
+        let item = viewModel.topOfWeekList[indexPath.item]
+        cell.title.text = item.volumeInfo.title
+        cell.subTitle.text = item.volumeInfo.description
+        if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
+            cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
+        }
+        
         return cell
     }
 }
@@ -116,7 +122,6 @@ extension TopOfWeekList:UICollectionViewDelegateFlowLayout{
 // MARK: - Preview
 #Preview {
     let list = TopOfWeekList()
-    list.data = TopOfWeekModel.dummy()
     return list
 }
 
