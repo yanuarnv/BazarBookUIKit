@@ -65,10 +65,6 @@ class  TopOfWeekCell: UICollectionViewCell {
 }
 #Preview{
     var widget = TopOfWeekCell()
-    let item = BookModel.dummy().first!
-    widget.title.text = item.volumeInfo.title
-    widget.subTitle.text = item.volumeInfo.description
-    widget.image.image = UIImage(systemName: "photo.fill")
     return widget
 }
 

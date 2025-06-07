@@ -33,6 +33,8 @@
 		E4A804A92D6F0C520070CC91 /* CarouselSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A804A82D6F0C3D0070CC91 /* CarouselSlider.swift */; };
 		E4A804AB2D6F521C0070CC91 /* HomeBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A804AA2D6F52180070CC91 /* HomeBannerModel.swift */; };
 		E4A804AD2D709F2D0070CC91 /* TopOfWeekList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A804AC2D709F100070CC91 /* TopOfWeekList.swift */; };
+		E4C0FC2A2DF44C2400AFC00E /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C0FC292DF44C2000AFC00E /* AppContainer.swift */; };
+		E4C0FC2C2DF4680F00AFC00E /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C0FC2B2DF4680A00AFC00E /* Injection.swift */; };
 		E4C1C71A2DA963CB00BE4ECF /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = E4C1C7192DA963CB00BE4ECF /* SDWebImage */; };
 		E4C1C71C2DA963CB00BE4ECF /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C1C71B2DA963CB00BE4ECF /* SDWebImageMapKit */; };
 		E4C1C7252DA969CC00BE4ECF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C1C7232DA969CC00BE4ECF /* HomeViewModel.swift */; };
@@ -78,6 +80,8 @@
 		E4A804A82D6F0C3D0070CC91 /* CarouselSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSlider.swift; sourceTree = "<group>"; };
 		E4A804AA2D6F52180070CC91 /* HomeBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerModel.swift; sourceTree = "<group>"; };
 		E4A804AC2D709F100070CC91 /* TopOfWeekList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopOfWeekList.swift; sourceTree = "<group>"; };
+		E4C0FC292DF44C2000AFC00E /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
+		E4C0FC2B2DF4680A00AFC00E /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		E4C1C7172DA9634300BE4ECF /* BazarBookUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BazarBookUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4C1C71F2DA964B500BE4ECF /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		E4C1C7232DA969CC00BE4ECF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 		E40CC4812D632505000990CD /* Applications */ = {
 			isa = PBXGroup;
 			children = (
+				E4C0FC2B2DF4680A00AFC00E /* Injection.swift */,
+				E4C0FC292DF44C2000AFC00E /* AppContainer.swift */,
 				E4DB3FA12D75F8DC00F168EA /* ConstantValue.swift */,
 				E44B14DC2C8968010082FB19 /* AppDelegate.swift */,
 				E478FD492C8B65B6005A84F4 /* SceneDelegate.swift */,
@@ -337,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C0FC2C2DF4680F00AFC00E /* Injection.swift in Sources */,
 				E43CE0512CB43C9D007E108D /* SecondaryButton.swift in Sources */,
 				E4402EFD2D3E603500578DCA /* SosialMediaButton.swift in Sources */,
 				E42E92CB2D7DF096003047CB /* MainTabbarController.swift in Sources */,
@@ -356,6 +363,7 @@
 				E478FD422C8B5BA1005A84F4 /* OnboardingItemViewController.swift in Sources */,
 				E4D16FCD2CB8C8DE00EDC88A /* SignInViewController.swift in Sources */,
 				E41E15F72D4E75A3009C15BF /* SignUpViewController.swift in Sources */,
+				E4C0FC2A2DF44C2400AFC00E /* AppContainer.swift in Sources */,
 				E41F66BB2D4FB86F00CB6D4A /* ForgotPasswordCard.swift in Sources */,
 				E478FD512C8C3EFF005A84F4 /* OnBoardingModel.swift in Sources */,
 				E4FC91B92D785A69007422E7 /* AuthorsCell.swift in Sources */,

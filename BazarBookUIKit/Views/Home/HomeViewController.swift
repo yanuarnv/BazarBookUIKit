@@ -1,7 +1,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    private let viewmodel = HomeViewModel(service: BookApiServiceImpl())
+    @Inject private var viewmodel:HomeViewModel
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -32,13 +32,11 @@ class HomeViewController: UIViewController {
     
     private let bestVendorsList: BestVendorsList = {
         let list = BestVendorsList()
-        list.data = BestVendorsModel.dummy()
         return list
     }()
     
     private let authorList: AuthorsList = {
         let list = AuthorsList()
-        list.data = AuthorModel.dummy()
         return list
     }()
     
@@ -46,6 +44,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         Task{
             await topOfWeekList.loadData()
+            await bestVendorsList.loadData()
+            await authorList.loadData()
         }
         view.backgroundColor = .white
         self.title = "Home"
@@ -105,7 +105,7 @@ extension HomeViewController {
             bestVendorsList.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             bestVendorsList.heightAnchor.constraint(equalToConstant: 130),
             //author list
-            authorList.topAnchor.constraint(equalTo: bestVendorsList.bottomAnchor, constant: screenPadding),
+            authorList.topAnchor.constraint(equalTo: bestVendorsList.bottomAnchor, constant: 40),
             authorList.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             authorList.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             authorList.heightAnchor.constraint(equalToConstant: 258),

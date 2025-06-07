@@ -14,6 +14,8 @@ class  AuthorsCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Title"
         label.font = .body
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
@@ -22,6 +24,8 @@ class  AuthorsCell: UICollectionViewCell {
         label.text = "Sub title"
         label.textColor = .textSecondary
         label.font = .subHead
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
@@ -51,6 +55,7 @@ class  AuthorsCell: UICollectionViewCell {
             //colum
             colum.centerYAnchor.constraint(equalTo: centerYAnchor),
             colum.centerXAnchor.constraint(equalTo: centerXAnchor),
+            colum.widthAnchor.constraint(equalToConstant: 130)
         ])
     }
     

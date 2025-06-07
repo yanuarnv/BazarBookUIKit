@@ -1,7 +1,7 @@
 import UIKit
 
 class AuthorsList: UIView, UICollectionViewDelegate {
-    
+    @Inject private var viewModel: HomeViewModel
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -11,10 +11,13 @@ class AuthorsList: UIView, UICollectionViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var data: [AuthorModel] = [] {
-        didSet {
-            collectionView.reloadData()
+    // make sure run in main thread
+    @MainActor
+    func loadData()async{
+        await viewModel.getAuthorBooks(maxResult: 6){error in
+          
         }
+        collectionView.reloadData()
     }
     
     // CollectionView Layout
@@ -92,17 +95,24 @@ extension AuthorsList {
 extension AuthorsList: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return viewModel.authorList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AuthorsCell", for: indexPath) as? AuthorsCell else {
             return UICollectionViewCell()
         }
-        let item = data[indexPath.item]
-        cell.title.text = item.name
-        cell.subTitle.text = item.job
-        cell.image.image = UIImage(named: item.image)
+        let item = viewModel.authorList[indexPath.item]
+        if let author = item.volumeInfo.authors{
+            cell.title.text = author.first
+        }else{
+            cell.title.text = "No Name"
+        }
+        
+        cell.subTitle.text = item.volumeInfo.title
+        if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
+            cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
+        }
         return cell
     }
 }
@@ -116,7 +126,6 @@ extension AuthorsList:UICollectionViewDelegateFlowLayout{
 // MARK: - Preview
 #Preview {
     let list = AuthorsList()
-    list.data = AuthorModel.dummy()
     return list
 }
 

@@ -32,8 +32,7 @@ extension UIViewController {
             targetVC = ForgotPasswordViewController()
         }
         guard let navigationController = from.navigationController else {
-            print("navigation nil")
-            return
+            fatalError("\(from) navigatonController not found")
         }
         if replace {
             navigationController.setViewControllers([targetVC], animated: true)
@@ -44,10 +43,4 @@ extension UIViewController {
         
     }
     
-    
-    static func initializeNavigationController() -> UINavigationController {
-//        let initialVC = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        let initialVC = MainTabbarController()
-        return UINavigationController(rootViewController: initialVC)
-    }
 }

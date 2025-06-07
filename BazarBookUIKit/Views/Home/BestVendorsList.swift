@@ -1,7 +1,7 @@
 import UIKit
 
 class BestVendorsList: UIView, UICollectionViewDelegate {
-    
+    @Inject private var viewModel: HomeViewModel
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -11,10 +11,13 @@ class BestVendorsList: UIView, UICollectionViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var data: [BestVendorsModel] = [] {
-        didSet {
-            collectionView.reloadData()
+    // make sure run in main thread
+    @MainActor
+    func loadData()async{
+        await viewModel.getBestVendorBooks(maxResult: 6){error in
+          
         }
+        collectionView.reloadData()
     }
     
     // CollectionView Layout
@@ -92,15 +95,17 @@ extension BestVendorsList {
 extension BestVendorsList: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return viewModel.bestVendorList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestVendorsCell", for: indexPath) as? BestVendorsCell else {
             return UICollectionViewCell()
         }
-        let item = data[indexPath.item]
-        cell.image.image = UIImage(named: item.image)
+        let item = viewModel.bestVendorList[indexPath.item]
+        if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
+            cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
+        }
         return cell
     }
 }
@@ -114,7 +119,6 @@ extension BestVendorsList:UICollectionViewDelegateFlowLayout{
 // MARK: - Preview
 #Preview {
     let list = BestVendorsList()
-    list.data = BestVendorsModel.dummy()
     return list
 }
 

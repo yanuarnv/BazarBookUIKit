@@ -1,7 +1,7 @@
 import UIKit
 
 class CategoryViewController: UIViewController {
-    let vm  = HomeViewModel(service: BookApiServiceImpl())
+    @Inject private var viewModel:HomeViewModel
     
     let button:PrimaryButton = {
         let btn = PrimaryButton()
@@ -55,7 +55,7 @@ extension CategoryViewController{
     @objc func buttonClicked(){
         Task{
             do{
-                try await vm.getBooks()
+//                try await vm.getBooks()
             }catch{
                 print(error)
             }
