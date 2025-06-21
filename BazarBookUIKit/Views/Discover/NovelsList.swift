@@ -1,7 +1,8 @@
 import UIKit
-
-class BestVendorsList: UIView, UICollectionViewDelegate {
+import SDWebImage
+class NovelsList: UIView, UICollectionViewDelegate {
     @Inject private var viewModel: HomeViewModel
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -10,11 +11,10 @@ class BestVendorsList: UIView, UICollectionViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     // make sure run in main thread
     @MainActor
     func loadData()async{
-        await viewModel.getBestVendorBooks(maxResult: 6){error in
+        await viewModel.getNovelBooks(maxResult: 6){error in
           
         }
         collectionView.reloadData()
@@ -24,7 +24,7 @@ class BestVendorsList: UIView, UICollectionViewDelegate {
     private let layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
         return layout
     }()
@@ -36,7 +36,7 @@ class BestVendorsList: UIView, UICollectionViewDelegate {
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
-        collectionView.register(BestVendorsCell.self, forCellWithReuseIdentifier: "BestVendorsCell")
+        collectionView.register(EconomicCell.self, forCellWithReuseIdentifier: "EconomicCell")
         return collectionView
     }()
     
@@ -49,7 +49,7 @@ class BestVendorsList: UIView, UICollectionViewDelegate {
     
     private let headerTitle: UILabel = {
         let label = UILabel()
-        label.text = "Best Vendors"
+        label.text = "Novels"
         label.font = .title2
         return label
     }()
@@ -60,65 +60,77 @@ class BestVendorsList: UIView, UICollectionViewDelegate {
         button.titleLabel?.font = .body
         return button
     }()
+    
+    private let colum:UIStackView = {
+        let colum = UIStackView()
+        colum.axis = .vertical
+        colum.spacing = 8
+        colum.translatesAutoresizingMaskIntoConstraints = false
+        return colum
+    }()
 }
 
 // MARK: - Setup Layout
-extension BestVendorsList {
+extension NovelsList {
     private func setup() {
         // Add header row
         [headerTitle, headerSubTitle].forEach{
             rowList.addArrangedSubview($0)
         }
         [rowList, collectionView].forEach{
-            addSubview($0)
+            colum.addArrangedSubview($0)
         }
         
         [headerTitle,headerSubTitle,rowList,collectionView].forEach{
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        addSubview(colum)
         
         NSLayoutConstraint.activate([
-            rowList.topAnchor.constraint(equalTo: topAnchor),
-            rowList.leadingAnchor.constraint(equalTo: leadingAnchor),
-            rowList.trailingAnchor.constraint(equalTo: trailingAnchor),
+            colum.topAnchor.constraint(equalTo: topAnchor),
+            colum.bottomAnchor.constraint(equalTo: bottomAnchor),
+            colum.trailingAnchor.constraint(equalTo: trailingAnchor),
+            colum.leadingAnchor.constraint(equalTo: leadingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: rowList.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 110)
+            collectionView.heightAnchor.constraint(equalToConstant: 250),
+            
+            rowList.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
+            headerSubTitle.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16)
         ])
     }
 }
 
 // MARK: - UICollectionView DataSource
-extension BestVendorsList: UICollectionViewDataSource {
+extension NovelsList: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.bestVendorList.count
+        return viewModel.novelsList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestVendorsCell", for: indexPath) as? BestVendorsCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EconomicCell", for: indexPath) as? EconomicCell else {
             return UICollectionViewCell()
         }
-        let item = viewModel.bestVendorList[indexPath.item]
+        let item = viewModel.novelsList[indexPath.item]
+        cell.title.text = item.volumeInfo.title
         if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
             cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
         }
+        
         return cell
     }
 }
 
-extension BestVendorsList:UICollectionViewDelegateFlowLayout{
+extension NovelsList:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 150, height: 220)
     }
 }
 
 // MARK: - Preview
 #Preview {
-    let list = BestVendorsList()
+    let list = NovelsList()
     return list
 }
 
