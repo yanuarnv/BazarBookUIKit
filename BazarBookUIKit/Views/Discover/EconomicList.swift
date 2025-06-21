@@ -1,7 +1,8 @@
 import UIKit
-
-class AuthorsList: UIView, UICollectionViewDelegate {
+import SDWebImage
+class EconomicList: UIView, UICollectionViewDelegate {
     @Inject private var viewModel: HomeViewModel
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -10,11 +11,10 @@ class AuthorsList: UIView, UICollectionViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     // make sure run in main thread
     @MainActor
     func loadData()async{
-        await viewModel.getAuthorBooks(maxResult: 6){error in
+        await viewModel.getEconomicBooks(maxResult: 6){error in
           
         }
         collectionView.reloadData()
@@ -24,7 +24,7 @@ class AuthorsList: UIView, UICollectionViewDelegate {
     private let layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
         return layout
     }()
@@ -36,7 +36,7 @@ class AuthorsList: UIView, UICollectionViewDelegate {
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
-        collectionView.register(AuthorsCell.self, forCellWithReuseIdentifier: "AuthorsCell")
+        collectionView.register(EconomicCell.self, forCellWithReuseIdentifier: "EconomicCell")
         return collectionView
     }()
     
@@ -49,7 +49,7 @@ class AuthorsList: UIView, UICollectionViewDelegate {
     
     private let headerTitle: UILabel = {
         let label = UILabel()
-        label.text = "Authors"
+        label.text = "Economic"
         label.font = .title2
         return label
     }()
@@ -60,72 +60,77 @@ class AuthorsList: UIView, UICollectionViewDelegate {
         button.titleLabel?.font = .body
         return button
     }()
+    
+    private let colum:UIStackView = {
+        let colum = UIStackView()
+        colum.axis = .vertical
+        colum.spacing = 8
+        colum.translatesAutoresizingMaskIntoConstraints = false
+        return colum
+    }()
 }
 
 // MARK: - Setup Layout
-extension AuthorsList {
+extension EconomicList {
     private func setup() {
         // Add header row
         [headerTitle, headerSubTitle].forEach{
             rowList.addArrangedSubview($0)
         }
         [rowList, collectionView].forEach{
-            addSubview($0)
+            colum.addArrangedSubview($0)
         }
         
         [headerTitle,headerSubTitle,rowList,collectionView].forEach{
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        addSubview(colum)
         
         NSLayoutConstraint.activate([
-            rowList.topAnchor.constraint(equalTo: topAnchor),
-            rowList.leadingAnchor.constraint(equalTo: leadingAnchor),
-            rowList.trailingAnchor.constraint(equalTo: trailingAnchor),
+            colum.topAnchor.constraint(equalTo: topAnchor),
+            colum.bottomAnchor.constraint(equalTo: bottomAnchor),
+            colum.trailingAnchor.constraint(equalTo: trailingAnchor),
+            colum.leadingAnchor.constraint(equalTo: leadingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: rowList.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 238)
+            collectionView.heightAnchor.constraint(equalToConstant: 250),
+            
+            rowList.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
+            headerSubTitle.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16)
         ])
     }
 }
 
 // MARK: - UICollectionView DataSource
-extension AuthorsList: UICollectionViewDataSource {
+extension EconomicList: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.authorList.count
+        return viewModel.economicList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AuthorsCell", for: indexPath) as? AuthorsCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EconomicCell", for: indexPath) as? EconomicCell else {
             return UICollectionViewCell()
         }
-        let item = viewModel.authorList[indexPath.item]
-        if let author = item.volumeInfo.authors{
-            cell.title.text = author.first
-        }else{
-            cell.title.text = "No Name"
-        }
-        
-        cell.subTitle.text = item.volumeInfo.title
+        let item = viewModel.economicList[indexPath.item]
+        cell.title.text = item.volumeInfo.title
         if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
             cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
         }
+        
         return cell
     }
 }
 
-extension AuthorsList:UICollectionViewDelegateFlowLayout{
+extension EconomicList:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 130, height: 160)
+        return CGSize(width: 150, height: 220)
     }
 }
 
 // MARK: - Preview
 #Preview {
-    let list = AuthorsList()
+    let list = EconomicList()
     return list
 }
 

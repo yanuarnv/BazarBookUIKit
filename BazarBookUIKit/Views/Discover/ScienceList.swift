@@ -1,6 +1,6 @@
 import UIKit
 import SDWebImage
-class TopOfWeekList: UIView, UICollectionViewDelegate {
+class ScienceList: UIView, UICollectionViewDelegate {
     @Inject private var viewModel: HomeViewModel
     
     override init(frame: CGRect) {
@@ -14,7 +14,7 @@ class TopOfWeekList: UIView, UICollectionViewDelegate {
     // make sure run in main thread
     @MainActor
     func loadData()async{
-        await viewModel.getTopOfWeekBooks(maxResult: 6){error in
+        await viewModel.getScienceBooks(maxResult: 6){error in
           
         }
         collectionView.reloadData()
@@ -24,7 +24,7 @@ class TopOfWeekList: UIView, UICollectionViewDelegate {
     private let layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
         return layout
     }()
@@ -36,7 +36,7 @@ class TopOfWeekList: UIView, UICollectionViewDelegate {
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
-        collectionView.register(TopOfWeekCell.self, forCellWithReuseIdentifier: "TopOfWeekCell")
+        collectionView.register(EconomicCell.self, forCellWithReuseIdentifier: "EconomicCell")
         return collectionView
     }()
     
@@ -49,7 +49,7 @@ class TopOfWeekList: UIView, UICollectionViewDelegate {
     
     private let headerTitle: UILabel = {
         let label = UILabel()
-        label.text = "Top of Week"
+        label.text = "Science"
         label.font = .title2
         return label
     }()
@@ -60,51 +60,60 @@ class TopOfWeekList: UIView, UICollectionViewDelegate {
         button.titleLabel?.font = .body
         return button
     }()
+    
+    private let colum:UIStackView = {
+        let colum = UIStackView()
+        colum.axis = .vertical
+        colum.spacing = 8
+        colum.translatesAutoresizingMaskIntoConstraints = false
+        return colum
+    }()
 }
 
 // MARK: - Setup Layout
-extension TopOfWeekList {
+extension ScienceList {
     private func setup() {
         // Add header row
         [headerTitle, headerSubTitle].forEach{
             rowList.addArrangedSubview($0)
         }
         [rowList, collectionView].forEach{
-            addSubview($0)
+            colum.addArrangedSubview($0)
         }
         
         [headerTitle,headerSubTitle,rowList,collectionView].forEach{
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
+        addSubview(colum)
         
         NSLayoutConstraint.activate([
-            rowList.topAnchor.constraint(equalTo: topAnchor),
-            rowList.leadingAnchor.constraint(equalTo: leadingAnchor),
-            rowList.trailingAnchor.constraint(equalTo: trailingAnchor),
+            colum.topAnchor.constraint(equalTo: topAnchor),
+            colum.bottomAnchor.constraint(equalTo: bottomAnchor),
+            colum.trailingAnchor.constraint(equalTo: trailingAnchor),
+            colum.leadingAnchor.constraint(equalTo: leadingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: rowList.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 238)
+            collectionView.heightAnchor.constraint(equalToConstant: 250),
+            
+            rowList.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
+            headerSubTitle.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16)
         ])
     }
 }
 
 // MARK: - UICollectionView DataSource
-extension TopOfWeekList: UICollectionViewDataSource {
+extension ScienceList: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.topOfWeekList.count
+        return viewModel.scienceList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopOfWeekCell", for: indexPath) as? TopOfWeekCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EconomicCell", for: indexPath) as? EconomicCell else {
             return UICollectionViewCell()
         }
-        let item = viewModel.topOfWeekList[indexPath.item]
+        let item = viewModel.scienceList[indexPath.item]
         cell.title.text = item.volumeInfo.title
-        cell.subTitle.text = item.volumeInfo.description
         if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
             cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
         }
@@ -113,15 +122,15 @@ extension TopOfWeekList: UICollectionViewDataSource {
     }
 }
 
-extension TopOfWeekList:UICollectionViewDelegateFlowLayout{
+extension ScienceList:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 130, height: 160)
+        return CGSize(width: 150, height: 220)
     }
 }
 
 // MARK: - Preview
 #Preview {
-    let list = TopOfWeekList()
+    let list = ScienceList()
     return list
 }
 

@@ -17,27 +17,27 @@ class  CarouselSliderCell: UICollectionViewCell {
         return colum
     }()
     
-     let title:UILabel = {
+    let title:UILabel = {
         let label = UILabel()
         label.text = "Title"
-        label.font = .title1
+        label.font = .title2
         return label
     }()
     
-     let subTitle:UILabel = {
+    let subTitle:UILabel = {
         let label = UILabel()
         label.text = "Sub title"
         label.font = .body
         return label
     }()
     
-     let buttonOrder:PrimaryButton = {
+    let buttonOrder:PrimaryButton = {
         let btn = PrimaryButton()
         btn.configuration(title: "Order Now")
         return btn
     }()
     
-     var image:UIImageView = UIImageView(image:UIImage(named: "example_banner")!)
+    var image:UIImageView = UIImageView(image:UIImage(named: "example_banner")!)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,20 +61,18 @@ class  CarouselSliderCell: UICollectionViewCell {
             // Image constraints
             image.heightAnchor.constraint(equalToConstant: 165),
             image.widthAnchor.constraint(equalToConstant: 140),
-            image.trailingAnchor.constraint(equalTo: row.trailingAnchor, constant: -16), // Ensure image is within row
-
+            
             // Column constraints
             colum.bottomAnchor.constraint(lessThanOrEqualTo: row.bottomAnchor), // Avoid strict bottom constraint
-            colum.leadingAnchor.constraint(equalTo: row.leadingAnchor, constant: 16),
-
+            colum.leadingAnchor.constraint(equalTo: row.leadingAnchor),
+            
             // Row constraints
             row.topAnchor.constraint(equalTo: topAnchor, constant: 16), // Avoid safeAreaLayoutGuide in cells
-            row.leadingAnchor.constraint(equalTo: leadingAnchor),
-            row.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            bottomAnchor.constraint(equalTo: row.bottomAnchor, constant: 16) // Provide spacing
+            row.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
+            row.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16),
+            row.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -16)
         ])
-
+        
     }
     
     required init?(coder: NSCoder) {

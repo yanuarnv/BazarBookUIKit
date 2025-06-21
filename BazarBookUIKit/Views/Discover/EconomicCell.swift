@@ -1,6 +1,6 @@
 
 import UIKit
-class  AuthorsCell: UICollectionViewCell {
+class  EconomicCell: UICollectionViewCell {
     
     private let colum = {
         let colum = UIStackView()
@@ -14,17 +14,7 @@ class  AuthorsCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Title"
         label.font = .body
-        label.numberOfLines = 1
-        label.lineBreakMode = .byTruncatingTail
-        return label
-    }()
-    
-    let subTitle:UILabel = {
-        let label = UILabel()
-        label.text = "Sub title"
-        label.textColor = .textSecondary
-        label.font = .subHead
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -32,7 +22,7 @@ class  AuthorsCell: UICollectionViewCell {
     var image:UIImageView = {
         let img =  UIImageView(image:UIImage(named: "exampleTopWeekImg")!)
         img.clipsToBounds = true
-        img.layer.cornerRadius = 65
+        img.layer.cornerRadius = 8
         img.contentMode = .scaleAspectFill
         return img
     }()
@@ -40,22 +30,22 @@ class  AuthorsCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         //setup
-        [image,title,subTitle].forEach{
+        [image,title].forEach{
             colum.addArrangedSubview($0)
         }
         addSubview(colum)
         //layout
-        [colum,title,subTitle,image].forEach{
+        [colum,title,image].forEach{
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         NSLayoutConstraint.activate([
             //image
-            image.heightAnchor.constraint(equalToConstant: 130),
-            image.widthAnchor.constraint(equalToConstant: 130),
+            image.heightAnchor.constraint(equalToConstant: 200),
+            image.widthAnchor.constraint(equalToConstant: 140),
             //colum
             colum.centerYAnchor.constraint(equalTo: centerYAnchor),
             colum.centerXAnchor.constraint(equalTo: centerXAnchor),
-            colum.widthAnchor.constraint(equalToConstant: 130)
+            colum.widthAnchor.constraint(equalToConstant: 150)
         ])
     }
     
@@ -66,7 +56,7 @@ class  AuthorsCell: UICollectionViewCell {
     
 }
 #Preview{
-    AuthorsCell()
+    var widget = EconomicCell()
+    return widget
 }
-
 

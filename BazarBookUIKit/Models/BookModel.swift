@@ -15,7 +15,6 @@ struct BookItem: Codable {
     let selfLink: String
     let volumeInfo: VolumeInfo
     let accessInfo: AccessInfo
-    let searchInfo: SearchInfo
 }
 
 // MARK: - AccessInfo
@@ -51,11 +50,6 @@ struct Offer: Codable {
 // MARK: - OfferListPrice
 struct OfferListPrice: Codable {
     let amountInMicros: Int
-}
-
-// MARK: - SearchInfo
-struct SearchInfo: Codable {
-    let textSnippet: String
 }
 
 // MARK: - VolumeInfo
