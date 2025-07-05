@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         configuredDependencyInjection()
         let window = UIWindow(windowScene: windowScene)
-        let rootVC = initializeNavigationController()
+        let rootVC = MainTabbarController()
         
         window.rootViewController = rootVC
         window.makeKeyAndVisible()
@@ -22,12 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 extension SceneDelegate{
-    
-    func initializeNavigationController() -> UINavigationController {
-        //        let initialVC = OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        let initialVC = MainTabbarController()
-        return UINavigationController(rootViewController: initialVC)
-    }
     
     func configuredDependencyInjection() {
         AppContainer.shared.register(type: BookApiService.self, component: BookApiServiceImpl())

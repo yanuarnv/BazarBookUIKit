@@ -1,31 +1,31 @@
 import UIKit
 
 class CategoryViewController: UIViewController {
-    @Inject private var viewModel:HomeViewModel
+    //    @Inject private var viewModel:HomeViewModel
     
-    let button:PrimaryButton = {
-        let btn = PrimaryButton()
-        btn.configuration(title: "click me")
-        return btn
+    private let titleLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Category"
+        label.font = .title2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    let text:UILabel = {
-        let text = UILabel()
-        text.text = "hello world"
-        text.font = .systemFont(ofSize: 20)
-        text.textColor = .black
-        return text
+    private let verticalLayout:UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
-    let colum:UIStackView = {
-        let colum = UIStackView()
-        colum.axis = .vertical
-        return colum
+    private let scrollview:UIScrollView = {
+        let scrollview = UIScrollView()
+        scrollview.translatesAutoresizingMaskIntoConstraints = false
+        return scrollview
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Category"
         setup()
         layout()
     }
@@ -33,34 +33,36 @@ class CategoryViewController: UIViewController {
 
 extension CategoryViewController{
     func setup(){
-        colum.addArrangedSubview(text)
-        colum.addArrangedSubview(button)
-        view.addSubview(colum)
-        
-        button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
-        
-        [colum,text,button].forEach{
-            $0.translatesAutoresizingMaskIntoConstraints = false
+        [titleLabel].forEach{
+            verticalLayout.addArrangedSubview($0)
         }
+        scrollview.addSubview(verticalLayout)
+        view.addSubview(scrollview)
     }
     
     func layout(){
         NSLayoutConstraint.activate([
-            colum.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            colum.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            // scrollview
+            scrollview.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            // vertical layout
+            verticalLayout.topAnchor.constraint(equalTo: scrollview.topAnchor),
+            verticalLayout.bottomAnchor.constraint(equalTo: scrollview.bottomAnchor),
+            verticalLayout.leadingAnchor.constraint(equalTo: scrollview.contentLayoutGuide.leadingAnchor),
+            verticalLayout.trailingAnchor.constraint(equalTo: scrollview.contentLayoutGuide.trailingAnchor),
+            verticalLayout.widthAnchor.constraint(equalTo: scrollview.frameLayoutGuide.widthAnchor),
+            
+            
+            
+            
+            
         ])
     }
 }
 extension CategoryViewController{
-    @objc func buttonClicked(){
-        Task{
-            do{
-//                try await vm.getBooks()
-            }catch{
-                print(error)
-            }
-        }
-    }
+    
 }
 #Preview{
     CategoryViewController()
