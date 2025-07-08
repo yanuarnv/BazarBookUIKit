@@ -35,6 +35,7 @@
 		E4A804AD2D709F2D0070CC91 /* EconomicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A804AC2D709F100070CC91 /* EconomicList.swift */; };
 		E4AB92282E19847700C45542 /* CategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AB92272E19846D00C45542 /* CategoryGridView.swift */; };
 		E4AB922A2E19848E00C45542 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AB92292E19848800C45542 /* CategoryCell.swift */; };
+		E4AB92342E1CFB2F00C45542 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AB92332E1CFB1C00C45542 /* CategoryListView.swift */; };
 		E4C0FC2A2DF44C2400AFC00E /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C0FC292DF44C2000AFC00E /* AppContainer.swift */; };
 		E4C0FC2C2DF4680F00AFC00E /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C0FC2B2DF4680A00AFC00E /* Injection.swift */; };
 		E4C1C71A2DA963CB00BE4ECF /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = E4C1C7192DA963CB00BE4ECF /* SDWebImage */; };
@@ -82,6 +83,7 @@
 		E4A804AC2D709F100070CC91 /* EconomicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomicList.swift; sourceTree = "<group>"; };
 		E4AB92272E19846D00C45542 /* CategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGridView.swift; sourceTree = "<group>"; };
 		E4AB92292E19848800C45542 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		E4AB92332E1CFB1C00C45542 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 		E4C0FC292DF44C2000AFC00E /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		E4C0FC2B2DF4680A00AFC00E /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		E4C1C7172DA9634300BE4ECF /* BazarBookUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BazarBookUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +144,7 @@
 		E42E92CC2D7DF12C003047CB /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E4AB92332E1CFB1C00C45542 /* CategoryListView.swift */,
 				E4AB92292E19848800C45542 /* CategoryCell.swift */,
 				E4AB92272E19846D00C45542 /* CategoryGridView.swift */,
 				E42E92CD2D7DF13C003047CB /* CategoryViewController.swift */,
@@ -378,6 +381,7 @@
 				E44B14DD2C8968010082FB19 /* AppDelegate.swift in Sources */,
 				E478FD4A2C8B65B6005A84F4 /* SceneDelegate.swift in Sources */,
 				E4A804A92D6F0C520070CC91 /* CarouselSlider.swift in Sources */,
+				E4AB92342E1CFB2F00C45542 /* CategoryListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

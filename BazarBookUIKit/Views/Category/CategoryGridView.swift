@@ -1,9 +1,12 @@
 import UIKit
 
 class CategoryGridView:UIView,UICollectionViewDelegate {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
+  
+    
+    init() {
+       
+        super.init(frame: .zero)
+        setup()                        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,6 +29,7 @@ class CategoryGridView:UIView,UICollectionViewDelegate {
         collectionView.backgroundColor = .clear
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -36,10 +40,11 @@ extension CategoryGridView{
     func setup (){
         addSubview(collectionView)
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 262 * CGFloat(10/2))
         ])
     }
 }
@@ -59,7 +64,7 @@ extension CategoryGridView: UICollectionViewDataSource {
 
 extension CategoryGridView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let spacing: CGFloat = 10
+        let spacing: CGFloat = 16
         let width = (collectionView.bounds.width - spacing) / 2
         return CGSize(width: width, height: 250)
     }

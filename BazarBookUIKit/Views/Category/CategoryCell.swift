@@ -3,7 +3,6 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         //setup
         [image,title,subtitle].forEach{
             layout.addArrangedSubview($0)
@@ -14,11 +13,9 @@ class CategoryCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             //image
             image.heightAnchor.constraint(equalToConstant: 200),
-            image.widthAnchor.constraint(equalToConstant: 140),
+            image.widthAnchor.constraint(equalTo: widthAnchor),
             //colum
-            layout.centerYAnchor.constraint(equalTo: centerYAnchor),
-            layout.centerXAnchor.constraint(equalTo: centerXAnchor),
-            layout.widthAnchor.constraint(equalToConstant: 150)
+            layout.widthAnchor.constraint(equalTo:widthAnchor)
         ])
     }
     
