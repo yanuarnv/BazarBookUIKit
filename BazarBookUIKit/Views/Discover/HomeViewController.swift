@@ -89,13 +89,23 @@ extension HomeViewController:UIScrollViewDelegate{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
-        if offsetY < -56 {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        }else{
-            navigationController?.setNavigationBarHidden(false, animated: true)
+        guard let navigationController = navigationController else { return }
+        
+        // Show navigation bar when scrolling down, hide when at top
+        if offsetY > 100 {
+            // Show navigation bar when scrolled down
+            if navigationController.navigationBar.isHidden {
+                navigationController.setNavigationBarHidden(false, animated: false)
+            }
+        } else {
+            // Hide navigation bar when at top
+            if !navigationController.navigationBar.isHidden {
+                navigationController.setNavigationBarHidden(true, animated: false)
+            }
         }
+        
     }
-
+    
 }
 
 extension HomeViewController {
@@ -122,7 +132,7 @@ extension HomeViewController {
     func layout() {
         NSLayoutConstraint.activate([
             // UIScrollView
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -148,5 +158,5 @@ extension HomeViewController {
 }
 
 #Preview{
-    HomeViewController()
+    PreviewHelper.mainTabbarController()
 }

@@ -3,14 +3,6 @@ import UIKit
 class CategoryViewController: UIViewController {
     //    @Inject private var viewModel:HomeViewModel
     
-    private let titleLabel:UILabel = {
-        let label = UILabel()
-        label.text = "Category"
-        label.font = .title1
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private let verticalLayout:UIView = {
         let stackView = UIView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,36 +28,50 @@ class CategoryViewController: UIViewController {
         return widget
     }()
     
-    private let line:UIView = {
-        let line = UIView()
-        line.backgroundColor = .gray
-        line.translatesAutoresizingMaskIntoConstraints = false
-        return line
-    }()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         layout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationController()
     }
 }
 
 extension CategoryViewController{
     func setup(){
         navigationItem.title = "Category"
-        scrollview.delegate = self
-        [titleLabel,line,categoryList,categoryGrid].forEach{
+        [categoryList,categoryGrid].forEach{
             verticalLayout.addSubview($0)
         }
         scrollview.addSubview(verticalLayout)
         view.addSubview(scrollview)
     }
     
+    func setupNavigationController() {
+        guard let navigationController = navigationController else { return }
+        
+        // Configure navigation bar appearance
+        navigationController.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+        
+        // Ensure navigation bar is visible
+        navigationController.setNavigationBarHidden(false, animated: false)
+        
+        // Configure scroll edge appearance for smooth transitions
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        navigationController.navigationBar.standardAppearance = appearance
+        navigationController.navigationBar.scrollEdgeAppearance = appearance
+        navigationController.navigationBar.compactAppearance = appearance
+    }
+    
     func layout(){
         NSLayoutConstraint.activate([
             // scrollview
-            scrollview.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -76,17 +82,7 @@ extension CategoryViewController{
             verticalLayout.trailingAnchor.constraint(equalTo: scrollview.contentLayoutGuide.trailingAnchor),
             verticalLayout.widthAnchor.constraint(equalTo: scrollview.frameLayoutGuide.widthAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: verticalLayout.safeAreaLayoutGuide.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: verticalLayout.leadingAnchor,constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: verticalLayout.trailingAnchor,constant: 16),
-            
-            line.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 12),
-            line.leadingAnchor.constraint(equalTo: verticalLayout.leadingAnchor,constant: 16),
-            line.trailingAnchor.constraint(equalTo: verticalLayout.trailingAnchor,constant: -16),
-            line.heightAnchor.constraint(equalToConstant: 1.3/UIScreen.main.scale),
-            
-            
-            categoryList.topAnchor.constraint(equalTo: line.bottomAnchor,constant: 16),
+            categoryList.topAnchor.constraint(equalTo: verticalLayout.topAnchor,constant: 16),
             categoryList.leadingAnchor.constraint(equalTo: verticalLayout.leadingAnchor,constant: 16),
             categoryList.trailingAnchor.constraint(equalTo: verticalLayout.trailingAnchor,constant: -16),
             categoryList.heightAnchor.constraint(equalToConstant: 45),
@@ -98,19 +94,7 @@ extension CategoryViewController{
         ])
     }
 }
-extension CategoryViewController:UIScrollViewDelegate{
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        if offsetY < -56 {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        }else{
-            
-            navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-    }
-    
-}
+
 #Preview{
-    CategoryViewController()
+    PreviewHelper.mainTabbarController()
 }
