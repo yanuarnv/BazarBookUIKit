@@ -105,20 +105,30 @@ extension EconomicList {
 extension EconomicList: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.economicList.count
+        if viewModel.economicList.isEmpty {
+            return 10
+        }else{
+            return viewModel.economicList.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EconomicCell", for: indexPath) as? EconomicCell else {
             return UICollectionViewCell()
         }
-        let item = viewModel.economicList[indexPath.item]
-        cell.title.text = item.volumeInfo.title
-        if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
-            cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
+        if viewModel.economicList.isEmpty {
+            cell.isLoading = true
+            return cell
+        }else{
+            cell.isLoading = false
+            let item = viewModel.economicList[indexPath.item]
+            cell.title.text = item.volumeInfo.title
+            if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
+                cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
+            }
+            
+            return cell
         }
-        
-        return cell
     }
 }
 

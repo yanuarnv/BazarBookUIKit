@@ -36,7 +36,7 @@ class ScienceList: UIView, UICollectionViewDelegate {
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
-        collectionView.register(EconomicCell.self, forCellWithReuseIdentifier: "EconomicCell")
+        collectionView.register(ScienceCell.self, forCellWithReuseIdentifier: "ScienceCell")
         return collectionView
     }()
     
@@ -109,7 +109,7 @@ extension ScienceList: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EconomicCell", for: indexPath) as? EconomicCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ScienceCell", for: indexPath) as? ScienceCell else {
             return UICollectionViewCell()
         }
         let item = viewModel.scienceList[indexPath.item]

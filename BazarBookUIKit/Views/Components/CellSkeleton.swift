@@ -1,6 +1,6 @@
 import UIKit
 
-class CategoryCellSkeleton: UICollectionViewCell {
+class CellSkeleton: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         //setup
@@ -12,8 +12,14 @@ class CategoryCellSkeleton: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             //image
-            image.heightAnchor.constraint(equalToConstant: 200),
+            image.heightAnchor.constraint(equalToConstant: 178),
             image.widthAnchor.constraint(equalTo: widthAnchor),
+            // title
+            title.widthAnchor.constraint(equalToConstant: 100),
+            title.heightAnchor.constraint(equalToConstant: 17),
+            //subtitle
+            subtitle.widthAnchor.constraint(equalToConstant: 100),
+            subtitle.heightAnchor.constraint(equalToConstant: 17),
             //colum
             layout.widthAnchor.constraint(equalTo:widthAnchor)
         ])
@@ -23,28 +29,29 @@ class CategoryCellSkeleton: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var image: UIImageView = {
-        let UII = UIImageView(image: UIImage(named: "exampleTopWeekImg"))
+    var image: UIView = {
+        let UII = UIView()
+        UII.backgroundColor = .lightGray
         UII.layer.cornerRadius = 8
         UII.clipsToBounds = true
-        UII.contentMode = .scaleAspectFill
         UII.translatesAutoresizingMaskIntoConstraints = false
         return UII
     }()
     
-     var title: UILabel = {
-        let UIL = UILabel()
-        UIL.text = "Podcast Name"
-        UIL.font = .body
+    var title: UIView = {
+        let UIL = UIView()
+        UIL.layer.cornerRadius = 8
+        UIL.clipsToBounds = true
+        UIL.backgroundColor = .lightGray
         UIL.translatesAutoresizingMaskIntoConstraints = false
         return UIL
     }()
     
-    var  subtitle: UILabel = {
-        let UIL = UILabel()
-        UIL.text = "Cadence"
-        UIL.font = .body
-        UIL.textColor = .secondaryLabel
+    var  subtitle: UIView = {
+        let UIL = UIView()
+        UIL.layer.cornerRadius = 8
+        UIL.clipsToBounds = true
+        UIL.backgroundColor = .lightGray
         UIL.translatesAutoresizingMaskIntoConstraints = false
         return UIL
     }()
@@ -59,5 +66,5 @@ class CategoryCellSkeleton: UICollectionViewCell {
 }
 
 #Preview {
-    CategoryCellSkeleton()
+    CellSkeleton()
 }

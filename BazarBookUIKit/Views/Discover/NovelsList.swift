@@ -36,7 +36,7 @@ class NovelsList: UIView, UICollectionViewDelegate {
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
-        collectionView.register(EconomicCell.self, forCellWithReuseIdentifier: "EconomicCell")
+        collectionView.register(NovelCell.self, forCellWithReuseIdentifier: "NovelCell")
         return collectionView
     }()
     
@@ -109,7 +109,7 @@ extension NovelsList: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EconomicCell", for: indexPath) as? EconomicCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NovelCell", for: indexPath) as? NovelCell else {
             return UICollectionViewCell()
         }
         let item = viewModel.novelsList[indexPath.item]
