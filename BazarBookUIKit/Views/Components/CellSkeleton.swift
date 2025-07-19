@@ -3,68 +3,65 @@ import UIKit
 class CellSkeleton: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //setup
-        [image,title,subtitle].forEach{
-            layout.addArrangedSubview($0)
-        }
-        
-        addSubview(layout)
-        
-        NSLayoutConstraint.activate([
-            //image
-            image.heightAnchor.constraint(equalToConstant: 178),
-            image.widthAnchor.constraint(equalTo: widthAnchor),
-            // title
-            title.widthAnchor.constraint(equalToConstant: 100),
-            title.heightAnchor.constraint(equalToConstant: 17),
-            //subtitle
-            subtitle.widthAnchor.constraint(equalToConstant: 100),
-            subtitle.heightAnchor.constraint(equalToConstant: 17),
-            //colum
-            layout.widthAnchor.constraint(equalTo:widthAnchor)
-        ])
+        setup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    private func setup() {
+        [image, title].forEach {
+            layout.addArrangedSubview($0)
+        }
+        
+        addSubview(layout)
+        
+        NSLayoutConstraint.activate([
+            // Image
+            image.heightAnchor.constraint(equalToConstant: 200),
+            image.widthAnchor.constraint(equalTo: widthAnchor),
+            // Title
+            title.widthAnchor.constraint(equalToConstant: 100),
+            title.heightAnchor.constraint(equalToConstant: 17),
+            // Layout
+            layout.widthAnchor.constraint(equalTo: widthAnchor)
+        ])
+    }
+    
+    // MARK: - UI Elements
     var image: UIView = {
-        let UII = UIView()
-        UII.backgroundColor = .lightGray
-        UII.layer.cornerRadius = 8
-        UII.clipsToBounds = true
-        UII.translatesAutoresizingMaskIntoConstraints = false
-        return UII
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        // shimer
+        let skeletonAnimation = CAGradientLayer.skeletonGradientLayer(in: CGRect(x: 0, y: 0, width: 150, height: 178))
+        
+        view.layer.addSublayer(skeletonAnimation)
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     var title: UIView = {
-        let UIL = UIView()
-        UIL.layer.cornerRadius = 8
-        UIL.clipsToBounds = true
-        UIL.backgroundColor = .lightGray
-        UIL.translatesAutoresizingMaskIntoConstraints = false
-        return UIL
-    }()
-    
-    var  subtitle: UIView = {
-        let UIL = UIView()
-        UIL.layer.cornerRadius = 8
-        UIL.clipsToBounds = true
-        UIL.backgroundColor = .lightGray
-        UIL.translatesAutoresizingMaskIntoConstraints = false
-        return UIL
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        let skeletonAnimation = CAGradientLayer.skeletonGradientLayer(in: CGRect(x: 0, y: 0, width: 100, height: 17))
+        view.layer.addSublayer(skeletonAnimation)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let layout: UIStackView = {
-        let colum = UIStackView()
-        colum.axis = .vertical
-        colum.spacing = 4
-        colum.translatesAutoresizingMaskIntoConstraints = false
-        return colum
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 4
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 }
-
-#Preview {
+#Preview{
     CellSkeleton()
 }
