@@ -1,6 +1,9 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    private var lastContentOffset: CGFloat = 0
+    private let scrollThreshold: CGFloat = 10.0
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -10,8 +13,6 @@ class HomeViewController: UIViewController {
     private let contentView: UIStackView = {
         let colum = UIStackView()
         colum.axis = .vertical
-        colum.alignment = .fill
-        colum.distribution = .equalSpacing
         colum.spacing = 16
         return colum
     }()
@@ -46,6 +47,30 @@ class HomeViewController: UIViewController {
         return list
     }()
     
+    private let accountContainer:UIStackView = {
+        let container = UIStackView()
+        container.axis = .horizontal
+        container.translatesAutoresizingMaskIntoConstraints = false
+        return container
+    }()
+    
+    private let accountImage:UIButton = {
+        let button = UIButton(type: .custom)
+        let img = UIImage(systemName: "person.circle")
+        button.setBackgroundImage(img, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let navigationTitle:UILabel = {
+        let label = UILabel()
+        label.text = "Discover"
+        label.font = .title1
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Task{
@@ -54,9 +79,31 @@ class HomeViewController: UIViewController {
             await novelsList.loadData()
         }
         view.backgroundColor = .white
-        self.title = "Home"
+        navigationItem.title = "Discover"
         setup()
         layout()
+    }
+    
+}
+extension HomeViewController:UIScrollViewDelegate{
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        guard let navigationController = navigationController else { return }
+        
+        // Show navigation bar when scrolling down, hide when at top
+        if offsetY > 100 {
+            // Show navigation bar when scrolled down
+            if navigationController.navigationBar.isHidden {
+                navigationController.setNavigationBarHidden(false, animated: false)
+            }
+        } else {
+            // Hide navigation bar when at top
+            if !navigationController.navigationBar.isHidden {
+                navigationController.setNavigationBarHidden(true, animated: false)
+            }
+        }
+        
     }
     
 }
@@ -64,13 +111,18 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     
     func setup() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+        scrollView.delegate = self
+        accountImage.addTarget(self, action: #selector(accountTapped), for: .touchUpInside)
         
-        [carouselSlider, economicList, scienceList, novelsList].forEach {
-            contentView.addArrangedSubview($0)
+        scrollView.addSubview(contentView)
+        [navigationTitle,accountImage].forEach{
+            accountContainer.addArrangedSubview($0)
         }
         
+        [accountContainer,carouselSlider, economicList, scienceList, novelsList].forEach {
+            contentView.addArrangedSubview($0)
+        }
+        view.addSubview(scrollView)
         // Aktifkan Auto Layout
         [scrollView, contentView, carouselSlider, economicList, scienceList, novelsList].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +132,7 @@ extension HomeViewController {
     func layout() {
         NSLayoutConstraint.activate([
             // UIScrollView
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -90,15 +142,21 @@ extension HomeViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            
-            
-            
             contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             
+            accountContainer.heightAnchor.constraint(equalToConstant: 44),
+            accountContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16),
+            accountContainer.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -16),
+            accountImage.widthAnchor.constraint(equalToConstant: 44),
+            
         ])
+    }
+    
+    @objc func accountTapped(for sender:UIButton){
+        print("tapped")
     }
 }
 
 #Preview{
-    HomeViewController()
+    PreviewHelper.mainTabbarController()
 }

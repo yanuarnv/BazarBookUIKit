@@ -1,6 +1,6 @@
 import UIKit
 
-class EconomicCell: UICollectionViewCell {
+class ScienceCell: UICollectionViewCell {
     
     // MARK: - UI Elements
     private let colum: UIStackView = {
@@ -106,7 +106,7 @@ class EconomicCell: UICollectionViewCell {
 }
 
 #Preview{
-    let x = EconomicCell()
+    let x = ScienceCell()
     x.configure(with: nil, isLoading: true)
     return x
 }

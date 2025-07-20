@@ -43,4 +43,9 @@ extension UIViewController {
         
     }
     
+    func forPreview() ->UIViewController{
+        AppContainer.configuredDependencyInjection()
+        return self
+    }
+    
 }

@@ -18,5 +18,27 @@ class AppContainer:AppContainerProtocol{
     func resolve<Element>(type: Element.Type) -> Element? {
         containers["\(type)"] as? Element
     }
-       
+    
+    func reset() {
+        containers.removeAll()
+    }
+}
+
+extension AppContainer{
+    static func configuredDependencyInjection() {
+        shared.register(type: BookApiService.self, component: BookApiServiceImpl())
+        shared.register(type: HomeViewModel.self, component: HomeViewModel(service: AppContainer.shared.resolve(type: BookApiService.self)!))
+    }
+    
+    static func previewContainer() -> AppContainer {
+        let container = AppContainer()
+        container.register(type: BookApiService.self, component: BookApiServiceImpl())
+        container.register(type: HomeViewModel.self, component: HomeViewModel(service: container.resolve(type: BookApiService.self)!))
+        return container
+    }
+    
+    static func configureForPreview() {
+        shared.reset() 
+        configuredDependencyInjection()
+    }
 }

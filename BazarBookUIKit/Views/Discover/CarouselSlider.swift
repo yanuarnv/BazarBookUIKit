@@ -26,7 +26,7 @@ class CarouselSlider:UIView{
     
     var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.pageIndicatorTintColor = .gray.withAlphaComponent(0.5)
+        pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = .primary
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
