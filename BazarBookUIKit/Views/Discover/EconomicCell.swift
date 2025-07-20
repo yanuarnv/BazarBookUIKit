@@ -68,11 +68,14 @@ class EconomicCell: UICollectionViewCell {
     
     private func showSkeleton() {
         let imagSkeleton = CAGradientLayer.skeletonGradientLayer(in: CGRect(x: 0, y: 0, width: 150, height: 200))
+        let titleSkeleton = CAGradientLayer.skeletonGradientLayer(in: CGRect(x: 0, y: 0, width: 150, height: 17))
         self.image.layer.addSublayer(imagSkeleton)
+        self.title.layer.addSublayer(titleSkeleton)
     }
     
     private func hideSkeleton() {
         self.image.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        self.title.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         
     }
     
@@ -98,11 +101,12 @@ class EconomicCell: UICollectionViewCell {
         image.image = nil
         title.text = nil
         colum.alpha = 1
+        hideSkeleton()
     }
 }
 
 #Preview{
     let x = EconomicCell()
-    x.configure(with: nil, isLoading: false)
+    x.configure(with: nil, isLoading: true)
     return x
 }

@@ -1,8 +1,19 @@
 import UIKit
 import SDWebImage
-class ScienceList: UIView, UICollectionViewDelegate {
+
+class ScienceList: UIView {
     @Inject private var viewModel: HomeViewModel
     
+    // MARK: - Loading State
+    private var isLoading = true {
+        didSet{
+            self.collectionView.reloadData()
+        }
+    }
+    
+    private let skeletonCellCount = 6
+    
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -11,25 +22,27 @@ class ScienceList: UIView, UICollectionViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // make sure run in main thread
+    
+    // MARK: - Data Loading
     @MainActor
-    func loadData()async{
-        await viewModel.getScienceBooks(maxResult: 6){error in
-          
+    func loadData() async {
+        isLoading = true
+        await viewModel.getScienceBooks(maxResult: 6) {error in
+            
         }
-        collectionView.reloadData()
+        isLoading = false
     }
     
-    // CollectionView Layout
+    // MARK: - UI Components
     private let layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 16
-        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 8
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         return layout
     }()
     
-    // CollectionView
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
@@ -50,87 +63,112 @@ class ScienceList: UIView, UICollectionViewDelegate {
     private let headerTitle: UILabel = {
         let label = UILabel()
         label.text = "Science"
-        label.font = .title2
+        label.font = .systemFont(ofSize: 20, weight: .bold)
         return label
     }()
     
     private let headerSubTitle: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("See All", for: .normal)
-        button.titleLabel?.font = .body
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        button.tintColor = .systemBlue
         return button
     }()
     
-    private let colum:UIStackView = {
-        let colum = UIStackView()
-        colum.axis = .vertical
-        colum.spacing = 8
-        colum.translatesAutoresizingMaskIntoConstraints = false
-        return colum
+    private let column: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 }
 
 // MARK: - Setup Layout
 extension ScienceList {
     private func setup() {
-        // Add header row
-        [headerTitle, headerSubTitle].forEach{
+        setupViews()
+        setupConstraints()
+        setupActions()
+    }
+    
+    private func setupViews() {
+        [headerTitle, headerSubTitle].forEach {
             rowList.addArrangedSubview($0)
         }
-        [rowList, collectionView].forEach{
-            colum.addArrangedSubview($0)
+        
+        [rowList, collectionView].forEach {
+            column.addArrangedSubview($0)
         }
         
-        [headerTitle,headerSubTitle,rowList,collectionView].forEach{
+        [headerTitle, headerSubTitle, rowList, collectionView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        addSubview(colum)
-        
+        addSubview(column)
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            colum.topAnchor.constraint(equalTo: topAnchor),
-            colum.bottomAnchor.constraint(equalTo: bottomAnchor),
-            colum.trailingAnchor.constraint(equalTo: trailingAnchor),
-            colum.leadingAnchor.constraint(equalTo: leadingAnchor),
+            column.topAnchor.constraint(equalTo: topAnchor),
+            column.bottomAnchor.constraint(equalTo: bottomAnchor),
+            column.trailingAnchor.constraint(equalTo: trailingAnchor),
+            column.leadingAnchor.constraint(equalTo: leadingAnchor),
             
             collectionView.heightAnchor.constraint(equalToConstant: 250),
             
-            rowList.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
-            headerSubTitle.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16)
+            rowList.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            headerSubTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
+    }
+    
+    private func setupActions() {
+        headerSubTitle.addTarget(self, action: #selector(seeAllTapped), for: .touchUpInside)
+    }
+    
+    @objc private func seeAllTapped() {
+        // Handle see all action
+        print("See all tapped")
     }
 }
 
 // MARK: - UICollectionView DataSource
 extension ScienceList: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.scienceList.count
+        return isLoading ? skeletonCellCount : viewModel.scienceList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ScienceCell", for: indexPath) as? ScienceCell else {
             return UICollectionViewCell()
         }
-        let item = viewModel.scienceList[indexPath.item]
-        cell.title.text = item.volumeInfo.title
-        if let imgLink = URL(string: item.volumeInfo.imageLinks.thumbnail){
-            cell.image.sd_setImage(with: imgLink,placeholderImage: nil)
+        
+        if isLoading {
+            cell.configure(with: nil, isLoading: true)
+        } else {
+            let item = viewModel.scienceList[indexPath.item]
+            cell.configure(with: item, isLoading: false)
         }
         
         return cell
     }
 }
 
-extension ScienceList:UICollectionViewDelegateFlowLayout{
+// MARK: - UICollectionView Delegate & Flow Layout
+extension ScienceList: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 150, height: 220)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard !isLoading else { return }
+        
+        let item = viewModel.economicList[indexPath.item]
+        // Handle item selection
+        print("Selected: \(item.volumeInfo.title)")
+    }
 }
 
-// MARK: - Preview
-#Preview {
-    let list = ScienceList()
-    return list
+#Preview{
+    PreviewHelper.homeViewController()
 }
-

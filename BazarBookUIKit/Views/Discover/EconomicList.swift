@@ -5,7 +5,11 @@ class EconomicList: UIView {
     @Inject private var viewModel: HomeViewModel
     
     // MARK: - Loading State
-    private var isLoading = true
+    private var isLoading = true {
+        didSet{
+            self.collectionView.reloadData()
+        }
+    }
     
     private let skeletonCellCount = 6
     
@@ -23,12 +27,10 @@ class EconomicList: UIView {
     @MainActor
     func loadData() async {
         isLoading = true
-        
         await viewModel.getEconomicBooks(maxResult: 6) {error in
             
         }
         isLoading = false
-//        self.collectionView.reloadData()
     }
     
     // MARK: - UI Components
@@ -141,13 +143,12 @@ extension EconomicList: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-//        if isLoading {
-//            cell.configure(with: nil, isLoading: true)
-//        } else {
-//            let item = viewModel.economicList[indexPath.item]
-//            cell.configure(with: item, isLoading: false)
-//        }
-        cell.configure(with: nil, isLoading: true)
+        if isLoading {
+            cell.configure(with: nil, isLoading: true)
+        } else {
+            let item = viewModel.economicList[indexPath.item]
+            cell.configure(with: item, isLoading: false)
+        }
         
         return cell
     }

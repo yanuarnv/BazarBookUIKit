@@ -49,10 +49,3 @@ extension UIViewController {
     }
     
 }
-
-extension UIView{
-    func forPreview()->UIView{
-        AppContainer.configuredDependencyInjection()
-        return self
-    }
-}
