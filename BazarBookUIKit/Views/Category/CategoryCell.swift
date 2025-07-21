@@ -1,6 +1,9 @@
 import UIKit
 
 class CategoryCell: UICollectionViewCell {
+    private let imagSkeleton = CAGradientLayer.skeletonGradientLayer(in: CGRect(x: 0, y: 0, width: 150, height: 200))
+    private let titleSkeleton = CAGradientLayer.skeletonGradientLayer(in: CGRect(x: 0, y: 0, width: 150, height: 17))
+    private let subtitleSkeleton = CAGradientLayer.skeletonGradientLayer(in: CGRect(x: 0, y: 0, width: 150, height: 17))
     override init(frame: CGRect) {
         super.init(frame: frame)
         //setup
@@ -32,7 +35,7 @@ class CategoryCell: UICollectionViewCell {
         return UII
     }()
     
-     var title: UILabel = {
+    var title: UILabel = {
         let UIL = UILabel()
         UIL.text = "Podcast Name"
         UIL.font = .body
@@ -56,8 +59,47 @@ class CategoryCell: UICollectionViewCell {
         colum.translatesAutoresizingMaskIntoConstraints = false
         return colum
     }()
+    private func showSkeleton() {
+        self.image.layer.addSublayer(imagSkeleton)
+        self.title.layer.addSublayer(titleSkeleton)
+        self.subtitle.layer.addSublayer(subtitleSkeleton)
+    }
+    
+    private func hideSkeleton() {
+        self.image.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        self.title.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        self.subtitle.layer.sublayers?.forEach{$0.removeFromSuperlayer()}
+        
+    }
+    func configure(with item: BookItem?, isLoading: Bool = false) {
+        if isLoading {
+            showSkeleton()
+        }else{
+            hideSkeleton()
+        }
+        
+        guard let item = item, !isLoading else { return }
+        
+        title.text = item.volumeInfo.title.isEmpty ? "No title" : item.volumeInfo.title
+        subtitle.text = item.volumeInfo.subtitle == nil ?"No subtitle" : item.volumeInfo.subtitle
+        if let imageURL = URL(string: item.volumeInfo.imageLinks.thumbnail) {
+            image.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder"))
+        }
+    }
+    override func layoutSublayers(of layer: CALayer) {
+        imagSkeleton.frame = image.frame
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        image.image = nil
+        title.text = nil
+        subtitle.text = nil
+        hideSkeleton()
+    }
 }
 
 #Preview {
-    CategoryCell()
+    let x = CategoryCell()
+    x.configure(with: nil, isLoading: true)
+    return x
 }

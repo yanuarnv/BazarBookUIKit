@@ -9,7 +9,7 @@ class BookApiServiceImpl:BookApiService{
             guard let url = URL(string: "\(Keys.baseURL)books/v1/volumes?q=\(name)&key=\(Keys.apiKey)&maxResults=\(maxResults)") else {
                 throw NSError(domain: "MyApp", code: 2, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
             }
-            print("GET: \(url)")
+            Logger.debug("GET: \(url)")
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             
@@ -19,7 +19,7 @@ class BookApiServiceImpl:BookApiService{
             
             return .success(decode.items)
         }catch{
-            print(error)
+            Logger.error(error.localizedDescription)
             return .failure(error)
         }
     }

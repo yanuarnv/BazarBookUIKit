@@ -2,7 +2,7 @@ import UIKit
 
 class CategoryListView: UIView,UICollectionViewDelegate {
     var selectedIndex: Int = 0
-    
+    @Inject private var viewModel:CategoryViewModel
     private let categoryMap:[(key: String, value: String)] = [
         ("heart.fill" , "For You"),
         ("square.grid.3x2.fill","All Titles"),
@@ -38,6 +38,10 @@ class CategoryListView: UIView,UICollectionViewDelegate {
 
 extension CategoryListView{
     func setup(){
+        Task{
+            await viewModel.getCategoryData(query: "Economic"){error in
+            }
+        }
         addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor),
@@ -72,6 +76,10 @@ extension CategoryListView{
         selectedIndex = index
         collectionView.reloadItems(at: [IndexPath(item: previousIndex, section: 0),
                                         IndexPath(item: selectedIndex, section: 0)])
+        Task{
+            await viewModel.getCategoryData(query: "\(sender.titleLabel?.text ?? "")"){error in
+            }
+        }
     }
 }
 
@@ -148,5 +156,5 @@ class CategoryListViewCell : UICollectionViewCell{
 }
 
 #Preview{
-    CategoryListViewCell()
+    PreviewHelper.categoryViewController()
 }

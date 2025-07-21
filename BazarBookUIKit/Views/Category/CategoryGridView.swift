@@ -1,12 +1,24 @@
 import UIKit
-
+import Combine
 class CategoryGridView:UIView,UICollectionViewDelegate {
-  
+    
+    @Inject private var viewModel:CategoryViewModel
+    private var cancellables = Set<AnyCancellable>()
+    
+    var isLoading = true {
+        didSet{
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     init() {
-       
         super.init(frame: .zero)
-        setup()                        
+        viewModel.$isLoading.sink{newValue in
+            self.isLoading = newValue
+        }.store(in: &cancellables)
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,19 +56,26 @@ extension CategoryGridView{
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 262 * CGFloat(10/2))
+            collectionView.heightAnchor.constraint(equalToConstant: 1330),
         ])
     }
+    
 }
 
 extension CategoryGridView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return isLoading ? 6 : viewModel.categoryData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else {
             return UICollectionViewCell()
+        }
+        if isLoading {
+            cell.configure(with: nil, isLoading: true)
+        } else {
+            let item = viewModel.categoryData[indexPath.item]
+            cell.configure(with: item, isLoading: false)
         }
         return cell
     }
@@ -71,5 +90,5 @@ extension CategoryGridView: UICollectionViewDelegateFlowLayout {
 }
 
 #Preview {
-    CategoryGridView()
+    PreviewHelper.categoryViewController()
 }

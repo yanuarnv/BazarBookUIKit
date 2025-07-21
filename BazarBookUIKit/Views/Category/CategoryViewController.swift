@@ -1,7 +1,8 @@
 import UIKit
+import Combine
 
 class CategoryViewController: UIViewController {
-    //    @Inject private var viewModel:HomeViewModel
+    @Inject private var viewModel:CategoryViewModel
     
     private let verticalLayout:UIView = {
         let stackView = UIView()
@@ -27,6 +28,7 @@ class CategoryViewController: UIViewController {
         widget.translatesAutoresizingMaskIntoConstraints = false
         return widget
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +92,7 @@ extension CategoryViewController{
             categoryGrid.leadingAnchor.constraint(equalTo: verticalLayout.leadingAnchor,constant: 16),
             categoryGrid.trailingAnchor.constraint(equalTo: verticalLayout.trailingAnchor,constant: -16),
             categoryGrid.topAnchor.constraint(equalTo: categoryList.bottomAnchor,constant: 40),
-            categoryGrid.bottomAnchor.constraint(equalTo: verticalLayout.safeAreaLayoutGuide.bottomAnchor)
+            categoryGrid.bottomAnchor.constraint(equalTo: verticalLayout.bottomAnchor)
         ])
     }
 }

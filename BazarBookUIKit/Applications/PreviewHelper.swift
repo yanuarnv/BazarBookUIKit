@@ -2,7 +2,7 @@ import UIKit
 
 struct PreviewHelper {
     static func configureForPreview() {
-        AppContainer.configureForPreview()
+        AppContainer.configuredDependencyInjection()
     }
     
     static func homeViewController() -> HomeViewController {

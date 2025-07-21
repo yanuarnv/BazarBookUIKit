@@ -20,11 +20,11 @@ final class HomeViewModel {
                 economicList = data
             case .failure(let apiError):
                 onError(apiError)
-                print("API Error: \(apiError.localizedDescription)")
+                Logger.error("API Error: \(apiError.localizedDescription)")
             }
         } catch {
             onError(error)
-            print("Unexpected error: \(error.localizedDescription)")
+            Logger.error("Unexpected error: \(error.localizedDescription)")
         }
     }
     
@@ -36,11 +36,11 @@ final class HomeViewModel {
                 scienceList = data
             case .failure(let apiError):
                 onError(apiError)
-                print("getBestVendorBooks API Error: \(apiError.localizedDescription)")
+                Logger.debug("getBestVendorBooks API Error: \(apiError.localizedDescription)")
             }
         } catch {
             onError(error)
-            print("Unexpected error: \(error.localizedDescription)")
+            Logger.error("Unexpected error: \(error.localizedDescription)")
         }
     }
     
@@ -52,11 +52,11 @@ final class HomeViewModel {
                 novelsList = data
             case .failure(let apiError):
                 onError(apiError)
-                print("getBestVendorBooks API Error: \(apiError.localizedDescription)")
+                Logger.debug("getBestVendorBooks API Error: \(apiError.localizedDescription)")
             }
         } catch {
             onError(error)
-            print("Unexpected error: \(error.localizedDescription)")
+            Logger.error("Unexpected error: \(error.localizedDescription)")
         }
     }
 }
