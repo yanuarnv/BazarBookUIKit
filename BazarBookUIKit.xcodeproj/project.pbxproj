@@ -54,6 +54,9 @@
 		E4E4E02F2E2E3BA300FBBBCB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E4E02E2E2E3B9F00FBBBCB /* Logger.swift */; };
 		E4E93F712E2C0D710097F3C6 /* CAGradientLayer+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E93F702E2C0D5A0097F3C6 /* CAGradientLayer+Extentions.swift */; };
 		E4E93F762E2D444C0097F3C6 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E93F752E2D44410097F3C6 /* CategoryViewModel.swift */; };
+		E4F2199D2E2FC6B6003559F3 /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F2199C2E2FC6AF003559F3 /* SearchListViewController.swift */; };
+		E4F2199F2E2FC8D4003559F3 /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F2199E2E2FC8C1003559F3 /* SearchListView.swift */; };
+		E4F219A12E2FC9D4003559F3 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F219A02E2FC9CC003559F3 /* SearchCell.swift */; };
 		E4FC91B72D785A5C007422E7 /* NovelsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FC91B62D785A4F007422E7 /* NovelsList.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +109,9 @@
 		E4E4E02E2E2E3B9F00FBBBCB /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		E4E93F702E2C0D5A0097F3C6 /* CAGradientLayer+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Extentions.swift"; sourceTree = "<group>"; };
 		E4E93F752E2D44410097F3C6 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		E4F2199C2E2FC6AF003559F3 /* SearchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
+		E4F2199E2E2FC8C1003559F3 /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
+		E4F219A02E2FC9CC003559F3 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		E4FC91B62D785A4F007422E7 /* NovelsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovelsList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -262,6 +268,7 @@
 		E4D16FD22CB8D0F100EDC88A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E4F2199B2E2FC696003559F3 /* Search */,
 				E42E92CC2D7DF12C003047CB /* Category */,
 				E40CC4842D63276A000990CD /* Discover */,
 				E45DD54F2C8DB017009D8B87 /* Components */,
@@ -279,6 +286,16 @@
 				E4D16FD32CB8D16300EDC88A /* Font+Extentions.swift */,
 			);
 			path = Extentions;
+			sourceTree = "<group>";
+		};
+		E4F2199B2E2FC696003559F3 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E4F219A02E2FC9CC003559F3 /* SearchCell.swift */,
+				E4F2199E2E2FC8C1003559F3 /* SearchListView.swift */,
+				E4F2199C2E2FC6AF003559F3 /* SearchListViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4F2199D2E2FC6B6003559F3 /* SearchListViewController.swift in Sources */,
 				E4AB92282E19847700C45542 /* CategoryGridView.swift in Sources */,
 				E4C0FC2C2DF4680F00AFC00E /* Injection.swift in Sources */,
 				E4960AD22E295F39005A399A /* NovelCell.swift in Sources */,
@@ -369,6 +387,7 @@
 				E4E93F762E2D444C0097F3C6 /* CategoryViewModel.swift in Sources */,
 				E45DD5512C8DB035009D8B87 /* PrimaryButton.swift in Sources */,
 				E4DB3FA42D76311900F168EA /* ScienceList.swift in Sources */,
+				E4F2199F2E2FC8D4003559F3 /* SearchListView.swift in Sources */,
 				E46558512CFD64000042EC57 /* BazarTextField.swift in Sources */,
 				E4A804AB2D6F521C0070CC91 /* HomeBannerModel.swift in Sources */,
 				E4A804A72D6E1E5F0070CC91 /* CarouselSliderCell.swift in Sources */,
@@ -388,6 +407,7 @@
 				E4AB922A2E19848E00C45542 /* CategoryCell.swift in Sources */,
 				E4A804AD2D709F2D0070CC91 /* EconomicList.swift in Sources */,
 				E42E92CE2D7DF142003047CB /* CategoryViewController.swift in Sources */,
+				E4F219A12E2FC9D4003559F3 /* SearchCell.swift in Sources */,
 				E40CC4862D63277F000990CD /* HomeViewController.swift in Sources */,
 				E4960AD02E295F03005A399A /* ScienceCell.swift in Sources */,
 				E4E93F712E2C0D710097F3C6 /* CAGradientLayer+Extentions.swift in Sources */,

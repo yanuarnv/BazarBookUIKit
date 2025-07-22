@@ -10,6 +10,11 @@ struct PreviewHelper {
         return HomeViewController()
     }
     
+    static func searchViewController() -> SearchListViewController {
+        configureForPreview()
+        return SearchListViewController()
+    }
+    
     static func categoryViewController() -> CategoryViewController {
         configureForPreview()
         return CategoryViewController()
